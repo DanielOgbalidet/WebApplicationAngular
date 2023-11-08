@@ -1,18 +1,26 @@
-<div id="full-area" class="container-fluid no-padding">
-  <div id="row-index" class="row no-padding">
-    <div id="left-side" class="col-md-6 no-padding">
-      <h1 id="headertext">HOME SWEET RENTED HOME!</h1>
-      <a id="listing-button" asp-area="" asp-controller="House" asp-action="Grid">
-        <button type="button" class="button"><span>Houses</span></button>
-      </a>
-      <a id="order-button" asp-controller="Order" asp-action="Table" asp-route-email="@UserManager.GetUserName(User)">
-        <button type="button" class="button"><span>Orders</span></button>
-      </a>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="full-area" class="container-fluid no-padding">
+        <div id="row-index" class="row no-padding">
+            <div id="left-side" class="col-md-6 no-padding">
+                <h1 id="headertext">HOME SWEET RENTED HOME!</h1>
+                <a id="listing-button" asp-area="" asp-controller="House" asp-action="Grid">
+                    <button type="button" class="button"><span>Houses</span></button>
+                </a>
+                <a id="order-button" asp-controller="Order" asp-action="Table" asp-route-email="@UserManager.GetUserName(User)">
+                    <button type="button" class="button"><span>Orders</span></button>
+                </a>
+            </div>
+            <div id="right-side" class="col-md-6 no-padding">
+                <div class="dark-background">
+                    <img src="./../assets/images/lux-house.jpg" id="image" alt="Villa" />
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="right-side" class="col-md-6 no-padding">
-      <div class="dark-background">
-        <img src="~/../images/lux-house.jpg" id="image" alt="Villa" />
-      </div>
-    </div>
-  </div>
-</div>
+</body>
