@@ -1,14 +1,38 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using WebApplicationAngular.DAL;
+using WebApplicationAngular.Models;
+using Serilog;
+using Serilog.Events;
 
-// Add services to the container.
+
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<HouseDbContext>(options => {
+    options.UseSqlite(
+        builder.Configuration["ConnectionStrings:HouseDbContextConnection"]);
+});
+
+builder.Services.AddScoped<IHouseRepository, HouseRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+var loggerConfiguration = new LoggerConfiguration()
+    .MinimumLevel.Information() // levels: Trace< Information < Warning < Erorr < Fatal
+    .WriteTo.File($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
+
+loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceContext", out var value) &&
+                            e.Level == LogEventLevel.Information &&
+                            e.MessageTemplate.Text.Contains("Executed DbCommand"));
+
+var logger = loggerConfiguration.CreateLogger();
+builder.Logging.AddSerilog(logger);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseStaticFiles();
@@ -22,3 +46,4 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html"); ;
 
 app.Run();
+
