@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HouseService } from './houses.service';
 
 @Component({
   selector: "app-houses-houseform",
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class HouseformComponent {
   houseForm: FormGroup;
 
-  constructor(private _formbuilder: FormBuilder, private _router: Router, private _http: HttpClient) {
+  constructor(private _formbuilder: FormBuilder, private _router: Router, private _houseService: HouseService) {
     this.houseForm = _formbuilder.group({
       address: ['', Validators.required],
       price: [0, Validators.required],
@@ -28,7 +28,7 @@ export class HouseformComponent {
     console.log(this.houseForm);
     const newHouse = this.houseForm.value;
     const createUrl = "api/house/create";
-    this._http.post<any>(createUrl, newHouse).subscribe(response => {
+    this._houseService.createHouse(newHouse).subscribe(response => {
       if (response.success) {
         console.log(response.message);
         this._router.navigate(['/houses']);

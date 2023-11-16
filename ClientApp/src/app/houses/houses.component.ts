@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IHouse } from './house';
 import { Router } from '@angular/router';
 import { HouseService } from './houses.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-houses-component',
@@ -15,7 +14,7 @@ export class HousesComponent implements OnInit {
   displayImage: boolean = true;
   houses: IHouse[] = [];
 
-  constructor(private _http: HttpClient, private _router: Router) { }
+  constructor(private _router: Router, private _houseService: HouseService) { }
 
   private _listFilter: string = '';
 
@@ -48,7 +47,7 @@ export class HousesComponent implements OnInit {
   */
 
   getHouses(): void {
-    this._http.get<IHouse[]>("api/house/").subscribe(data => {
+    this._houseService.getHouses().subscribe(data => {
       console.log("All", JSON.stringify(data));
       this.houses = data;
       this.filteredHouses = this.houses;

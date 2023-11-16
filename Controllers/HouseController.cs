@@ -13,26 +13,6 @@ public class HouseController : Controller
     private readonly IHouseRepository _houseRepository;
     private readonly ILogger<HouseController> _logger;
     private readonly HouseDbContext _db;
-    private static List<House> Houses = new List<House>()
-    {
-        new House
-        {
-            HouseId = 1,
-            Price = 34,
-            Address = "nsjfne",
-            ImageUrl = "34",
-            Bedrooms = 34,
-            Guests = 34,
-            Description = "34",
-            UserId = 34
-        }
-    };
-
-    [HttpGet]
-    public List<House> GetAll()
-    {
-        return Houses;
-    }
 
     public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db)
     {
@@ -41,7 +21,7 @@ public class HouseController : Controller
         _db = db;
     }
 
-    /*
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -53,7 +33,7 @@ public class HouseController : Controller
         }
         return Ok(houses);
     }
-    */
+    
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetHousebyId(int id)
@@ -114,19 +94,28 @@ public class HouseController : Controller
     */
 
     [HttpPost("create")]
-    public IActionResult Create([FromBody] House house)
+    public async Task<IActionResult> Create([FromBody] House house)
     {
         if (house == null)
         {
             return BadRequest("Invalid house data");
         }
-        house.HouseId = GetNextHouseId();
-        Houses.Add(house);
 
-        var response = new { success = true, message = "House " + house.Address + " created successfully" };
-        return Ok(response);
+        bool returnOk = await _houseRepository.Create(house);
+
+        if(returnOk)
+        {
+            var response = new { success = true, message = "House " + house.Address + " created successfully" };
+            return Ok(response);
+        }
+        else
+        {
+            var response = new { success = false, message = "House creation failed" };
+            return Ok(response);
+        }
     }
 
+    /*
     private static int GetNextHouseId()
     {
         if (Houses.Count == 0)
@@ -135,6 +124,7 @@ public class HouseController : Controller
         }
         return Houses.Max(house => house.HouseId) + 1;
     }
+    */
 
     [HttpPut("update/{id}")]
     public async Task<IActionResult> Update(House house)
