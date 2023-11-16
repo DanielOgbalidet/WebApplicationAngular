@@ -28,7 +28,8 @@ import { HouseformComponent } from './houses/houseform.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'houses', component: HousesComponent },
-      { path: 'houseform', component: HouseformComponent},
+      { path: 'houseform', component: HouseformComponent },
+      { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full'},
     ])
   ],

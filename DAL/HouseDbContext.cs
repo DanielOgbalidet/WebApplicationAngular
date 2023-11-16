@@ -8,7 +8,7 @@ public class HouseDbContext : DbContext
 {
     public HouseDbContext(DbContextOptions<HouseDbContext> options) : base(options)
     {
-        //Database.EnsureCreated();
+        Database.EnsureCreated();
     }
 
     public DbSet<House> Houses { get; set; }

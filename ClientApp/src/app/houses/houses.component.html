@@ -45,7 +45,7 @@
       <td>{{ house.Guests }}</td>
       <td>
         <a [routerLink]="['/houseform', 'edit', house.HouseId]">Update</a>
-        <!--<a class="delete-link" (click)="deleteHouse(house)">Delete</a>-->
+        <a class="delete-link" (click)="deleteHouse(house)">Delete</a>
       </td>
     </tr>
   </tbody>

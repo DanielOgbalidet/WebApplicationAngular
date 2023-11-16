@@ -14,7 +14,7 @@ public static class DBInit
 
         if (!context.Houses.Any())
         {
-            var items = new List<House>
+            var houses = new List<House>
             {
                 new House
             {
@@ -28,7 +28,7 @@ public static class DBInit
                 UserId = 34
             },
         };
-            context.AddRange(items);
+            context.AddRange(houses);
             context.SaveChanges();
         }
 

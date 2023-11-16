@@ -28,7 +28,7 @@ export class HousesComponent implements OnInit {
     this.filteredHouses = this.performFilter(value);
   }
 
-  /*
+  
   deleteHouse(house: IHouse): void {
     const confirmDelete = confirm(`Are you sure you want to delete "${house.Address}"`);
     if (confirmDelete) {
@@ -44,7 +44,7 @@ export class HousesComponent implements OnInit {
         });
     }
   }
-  */
+  
 
   getHouses(): void {
     this._houseService.getHouses().subscribe(data => {

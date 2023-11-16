@@ -1,4 +1,4 @@
-<h2>Create house</h2>
+<h2>{{ isEditMode ? 'Update' : 'Create' }} house</h2>
 
 <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
@@ -30,6 +30,6 @@
       <label asp-for="UserId">UserId <i class="bi bi-cash-coin"></i></label>
       <input asp-for="UserId" class="form-control" formControlName="userId" />
     </div>
-    <button class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">Create house</button>
+    <button class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} house</button>
     <button class="btn btn-secondary" (click)="backToHouses()">Cancel</button>
 </form>

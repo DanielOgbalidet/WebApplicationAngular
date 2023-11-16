@@ -21,6 +21,7 @@ namespace WebApplicationAngular.Models
         [JsonPropertyName("UserId")]
         public virtual int UserId { get; set; }
         [JsonPropertyName("User")]
+        [JsonIgnore]
         public virtual User? User { get; set; }
         [JsonPropertyName("Order")]
         public virtual List<Order>? Order { get; set; }
