@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebApplicationAngular.DAL;
 using WebApplicationAngular.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationAngular.Controllers;
 
@@ -15,7 +13,6 @@ public class HouseController : Controller
     private readonly IHouseRepository _houseRepository;
     private readonly ILogger<HouseController> _logger;
     private readonly HouseDbContext _db;
-    private readonly UserManager<IdentityUser> _userManager;
     private static List<House> Houses = new List<House>()
     {
         new House
@@ -37,12 +34,11 @@ public class HouseController : Controller
         return Houses;
     }
 
-    public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db, UserManager<IdentityUser> userManager)
+    public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db)
     {
         _houseRepository = houseRepository;
         _logger = logger;
         _db = db;
-        _userManager = userManager;
     }
 
     /*

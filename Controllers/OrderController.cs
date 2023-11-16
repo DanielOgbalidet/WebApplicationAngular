@@ -22,7 +22,6 @@ public class OrderController : Controller
     }
 
 
-    [Authorize]
     //Show all orders a sepcific user made
     public async Task<IActionResult> Table(String email)
     {
@@ -47,14 +46,12 @@ public class OrderController : Controller
         return View(orders);
     }
 
-    [Authorize]
     [HttpGet("{inHouseId}")]
     public IActionResult CreateOrder(int inHouseId)
     {
         return RedirectToAction("Details", "House", new { id = inHouseId });
     }
 
-    [Authorize]
     [HttpPost]
     //Method that creates a new order
     public async Task<IActionResult> CreateOrder(String trip_start, String trip_end, int inHouseId, int inTotalPrice, String email)
@@ -97,7 +94,6 @@ public class OrderController : Controller
     }
 
     [HttpGet("{id}")]
-    [Authorize]
     public async Task<IActionResult> Update(int id)
     {
         //Find the specific order
@@ -111,7 +107,6 @@ public class OrderController : Controller
     }
 
     [HttpPost]
-    [Authorize]
     //Update order
     public async Task<IActionResult> Update(Order order, String email)
     {
@@ -126,7 +121,6 @@ public class OrderController : Controller
     }
 
     [HttpGet("{id}")]
-    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         //Find specific order
@@ -141,7 +135,7 @@ public class OrderController : Controller
     }
 
     [HttpPost]
-    [Authorize]
+ 
     public async Task<IActionResult> DeleteConfirmed(int id, string email)
     {
         //Try to delete order
