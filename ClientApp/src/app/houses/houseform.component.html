@@ -1,0 +1,34 @@
+<h2>Create house</h2>
+
+<form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label asp-for="Price">Price <i class="bi bi-cash-coin"></i></label>
+    <input asp-for="Price" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Address">Address <i class="bi bi-cash-coin"></i></label>
+    <input asp-for="Address" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Bedrooms">Bedrooms <i class="bi bi-door-open"></i></label>
+    <input asp-for="Bedrooms" class="form-control" />
+
+  </div>
+  <div class="form-group">
+    <label asp-for="ImageUrl">ImageUrl <i class="bi bi-door-open"></i></label>
+    <input asp-for="ImageUrl" class="form-control" />
+  </div>
+    <div class="form-group">
+      <label asp-for="Guests">Guests <i class="bi bi-people-fill"></i></label>
+      <input asp-for="Guests" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label asp-for="Description">Description <i class="bi bi-text-left"></i></label>
+      <input asp-for="Description" class="form-control" maxlength="200" />
+    </div>
+    <div class="form-group">
+      <label asp-for="UserId">UserId <i class="bi bi-cash-coin"></i></label>
+      <input asp-for="UserId" class="form-control" />
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">Create house</button>
+</form>

@@ -38,14 +38,14 @@
   <tbody>
     <tr *ngFor='let house of filteredHouses'>
       <td>{{ house.HouseId }}</td>
-      <td>{{ house.Price }}</td>
+      <td width="120">{{ house.Price | convertCurrency : 'kr.' }}</td>
       <td>{{ house.Address }}</td>
       <td>{{ house.Description }}</td>
       <td>{{ house.Bedrooms }}</td>
       <td>{{ house.Guests }}</td>
       <td>
         <a [routerLink]="['/houseform', 'edit', house.HouseId]">Update</a>
-        <a class="delete-link" (click)="deleteHouse(house)">Delete</a>
+        <!--<a class="delete-link" (click)="deleteHouse(house)">Delete</a>-->
       </td>
     </tr>
   </tbody>

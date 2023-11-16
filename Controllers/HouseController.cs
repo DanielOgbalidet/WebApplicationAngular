@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationAngular.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+
 public class HouseController : Controller
 {
 
@@ -13,6 +16,26 @@ public class HouseController : Controller
     private readonly ILogger<HouseController> _logger;
     private readonly HouseDbContext _db;
     private readonly UserManager<IdentityUser> _userManager;
+    private static List<House> Houses = new List<House>()
+    {
+        new House
+        {
+            HouseId = 1,
+            Price = 34,
+            Address = "nsjfne",
+            ImageUrl = "34",
+            Bedrooms = 34,
+            Guests = 34,
+            Description = "34",
+            UserId = 34
+        }
+    };
+
+    [HttpGet]
+    public List<House> GetAll()
+    {
+        return Houses;
+    }
 
     public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db, UserManager<IdentityUser> userManager)
     {
@@ -22,6 +45,7 @@ public class HouseController : Controller
         _userManager = userManager;
     }
 
+    /*
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -33,6 +57,7 @@ public class HouseController : Controller
         }
         return Ok(houses);
     }
+    */
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetHousebyId(int id)
