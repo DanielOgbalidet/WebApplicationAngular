@@ -15,7 +15,7 @@ export class HousesComponent implements OnInit {
   displayImage: boolean = true;
   houses: IHouse[] = [];
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, private _router: Router) { }
 
   private _listFilter: string = '';
 
@@ -68,11 +68,9 @@ export class HousesComponent implements OnInit {
     this.displayImage = !this.displayImage;
   }
 
-  /*
-  navigateToItemform() {
+  navigateToHouseform() {
     this._router.navigate(['/houseform']);
   }
-  */
 
   ngOnInit(): void {
     this.getHouses();

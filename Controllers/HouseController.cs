@@ -71,6 +71,7 @@ public class HouseController : Controller
         return Ok(house);
     }
 
+    /*
     //post-mothod for creating an house, needs to be authorized to use,
     //takes an house-object, creators email, an grid-image and a list of
     //images for the detail-view as arguments
@@ -113,6 +114,30 @@ public class HouseController : Controller
             return Ok(response);
         }
 
+    }
+    */
+
+    [HttpPost("create")]
+    public IActionResult Create([FromBody] House house)
+    {
+        if (house == null)
+        {
+            return BadRequest("Invalid house data");
+        }
+        house.HouseId = GetNextHouseId();
+        Houses.Add(house);
+
+        var response = new { success = true, message = "House " + house.Address + " created successfully" };
+        return Ok(response);
+    }
+
+    private static int GetNextHouseId()
+    {
+        if (Houses.Count == 0)
+        {
+            return 1;
+        }
+        return Houses.Max(house => house.HouseId) + 1;
     }
 
     [HttpPut("update/{id}")]

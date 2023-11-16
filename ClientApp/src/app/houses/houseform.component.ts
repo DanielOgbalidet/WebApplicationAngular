@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: "app-houses-houseform",
@@ -9,7 +11,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } 
 export class HouseformComponent {
   houseForm: FormGroup;
 
-  constructor(private _formbuilder: FormBuilder) {
+  constructor(private _formbuilder: FormBuilder, private _router: Router, private _http: HttpClient) {
     this.houseForm = _formbuilder.group({
       address: ['', Validators.required],
       price: [0, Validators.required],
@@ -24,8 +26,20 @@ export class HouseformComponent {
   onSubmit() {
     console.log("HouseCreate form submitted");
     console.log(this.houseForm);
-    console.log('The house ' + this.houseForm.value.address + ' is created');
-    console.log(this.houseForm.touched);
+    const newHouse = this.houseForm.value;
+    const createUrl = "api/house/create";
+    this._http.post<any>(createUrl, newHouse).subscribe(response => {
+      if (response.success) {
+        console.log(response.message);
+        this._router.navigate(['/houses']);
+      }
+      else {
+        console.log('House creation failed');
+      }
+    });
   }
 
+  backToHouses() {
+    this._router.navigate(['/houses']);
+  }
 }
