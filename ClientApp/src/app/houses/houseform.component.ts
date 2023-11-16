@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } 
 
 @Component({
   selector: "app-houses-houseform",
-  templateUrl: ".houseform.component.html"
+  templateUrl: "./houseform.component.html"
 })
 
 export class HouseformComponent {
