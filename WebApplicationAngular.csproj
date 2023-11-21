@@ -28,11 +28,13 @@
     <None Remove="ClientApp\src\app\shared\convertPipe.ts" />
     <None Remove="ClientApp\src\assets\images\" />
     <None Remove="ClientApp\src\app\houses\Grid\" />
+    <None Remove="ClientApp\src\app\houses\Details\" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
     <Folder Include="ClientApp\src\app\houses\Grid\" />
+    <Folder Include="ClientApp\src\app\houses\Details\" />
   </ItemGroup>
 
   <ItemGroup>
