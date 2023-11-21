@@ -27,10 +27,12 @@
     <None Remove="ClientApp\src\app\houses\houseform.component.ts" />
     <None Remove="ClientApp\src\app\shared\convertPipe.ts" />
     <None Remove="ClientApp\src\assets\images\" />
+    <None Remove="ClientApp\src\app\houses\Grid\" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
+    <Folder Include="ClientApp\src\app\houses\Grid\" />
   </ItemGroup>
 
   <ItemGroup>

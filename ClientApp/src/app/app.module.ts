@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { HousesComponent } from './houses/houses.component';
+import { HousesComponent } from './houses/Grid/houses.component';
 import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
 
