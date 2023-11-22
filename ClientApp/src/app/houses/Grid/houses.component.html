@@ -8,7 +8,7 @@
     </div>
     <div class="row g-4">
         <div *ngFor='let house of filteredHouses' class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <a id="link" [routerLink]="['/details']">
+            <a id="link" [routerLink]="['/details', house.HouseId]">
                 <!--Link til details hus, spesifikt hus-->
                 <div class="col" id="Cards">
                     <div class="card">

@@ -1,11 +1,110 @@
-<!DOCTYPE html>
-<html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
-<body>
-    <h1>Hei</h1>
-</body>
-</html>
 
+<div class="container-fluid" id="details_container" *ngIf="newHouse">
+    <div class="row">
+        <div id="image-part" class="col-11 col-lg-6 col-md-11">
+            <img src="@Model.ImageUrl" alt="@Model.Address">
+        </div>
+        <div id="info-part" class="col-11 col-lg-6 col-md-11">
+            <div class="inner-card">
+                <h1>{{ newHouse.Address }}</h1>
+                <p id="description-text">{{ newHouse.Description }}</p>
+                <h3>{{ newHouse.Price }}</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th><i class="bi bi-door-open"></i>   Bedrooms:</th>
+                            <td>{{ newHouse.Bedrooms }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="bi bi-people"></i>   Guests:</th>
+                            <td>{{ newHouse.Guests }}</td>
+                        </tr>
+                        <tr>
+                            <th><i class="bi bi-person"></i>   Owner:</th>
+                            <td>{{ newHouse.UserId }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="inner">
+                <div class="card">
+                    <h3>Choose dates and order here!</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>FROM:</th>
+                                <th>TO:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Input field for start date -->
+                                    <input type="date" id="startDate" name="trip_start"
+                                           min="@curdate" max="2025-12-31" />
+                                </td>
+                                <td>
+                                    <!-- Input field for end date -->
+                                    <input type="date" id="endDate" name="trip_end"
+                                           min="@curdate" max="2025-12-31" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>//Eventlistener that starts function for calculating price and nr of nights
+    document.addEventListener("DOMContentLoaded", function () {
+        // Creates constants from each element trough their id
+        const startDateInput = document.getElementById("startDate");
+        const endDateInput = document.getElementById("endDate");
+        const resultElement = document.getElementById("totalPrice");
+        const nightsNr = document.getElementById("nightsNr");
+        const inTotal = document.getElementById("inTotalPrice");
+        const infoReveal = document.getElementsByClassName("info");
+        const validateDates = document.getElementById("validate")
+
+        // Calls function "updateDays" when start- or end-date changes
+        startDateInput.addEventListener("change", updateDays);
+        endDateInput.addEventListener("change", updateDays);
+
+        // Function for calculating days and price
+        function updateDays() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            //chekcs if values are valid
+            if (!isNaN(startDate) && !isNaN(endDate) && startDate < endDate) {
+                // Calculates number of days and total price
+                const timeDiff = endDate - startDate;
+                const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                const totalPrice = days * @Model.Price;
+
+                // Updates the textfields for results
+                nightsNr.textContent = days + " Night(s)"
+                resultElement.textContent = totalPrice + " NOK";
+                inTotal.value = totalPrice;
+                validateDates.style.display = 'none';
+
+                // Display all elements with the "info" class
+                for (let i = 0; i < infoReveal.length; i++) {
+                    infoReveal[i].style.display = 'table-row';
+                }
+
+            } else {
+                // Handeling illegal values
+                validateDates.style.display = 'table-row';
+
+                for (let i = 0; i < infoReveal.length; i++) {
+                    infoReveal[i].style.display = 'none';
+                }
+            }
+        }
+    });</script>

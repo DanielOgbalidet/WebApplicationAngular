@@ -28,7 +28,6 @@ export class HousesComponent implements OnInit {
     this.filteredHouses = this.performFilter(value);
   }
 
-  
   deleteHouse(house: IHouse): void {
     const confirmDelete = confirm(`Are you sure you want to delete "${house.Address}"`);
     if (confirmDelete) {
@@ -51,8 +50,7 @@ export class HousesComponent implements OnInit {
       console.log("All", JSON.stringify(data));
       this.houses = data;
       this.filteredHouses = this.houses;
-    }
-    );
+    });
   }
 
   filteredHouses: IHouse[] = this.houses;
