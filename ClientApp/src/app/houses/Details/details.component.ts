@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IHouse } from '../house';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../houses.service';
+import { IUser } from '../user';
 
 @Component({
   selector: 'app-details', // Specify the selector for the component
@@ -10,7 +11,8 @@ import { HouseService } from '../houses.service';
 })
 
 export class DetailsComponent implements OnInit {
-  newHouse: IHouse = {} as IHouse; // Adjust the type according to your house object structur
+  newHouse: IHouse = {} as IHouse; // Adjust the type according to your house object structure
+  newUser: IUser = {} as IUser; 
   houseId: number = -1;
 
   constructor(private _router: Router,
@@ -30,7 +32,9 @@ export class DetailsComponent implements OnInit {
       .subscribe(
         (house: any) => {
           console.log('retreived house: ', house);
+          console.log('retreived user: ', house.user); 
           this.newHouse = house;
+          this.newHouse.User = house.user; 
           console.log("New House: ", this.newHouse);
         },
         (error: any) => {
