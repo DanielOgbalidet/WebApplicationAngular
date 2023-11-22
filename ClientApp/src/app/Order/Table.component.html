@@ -23,23 +23,28 @@
           <th>Actions</th>
         </tr>
 
+
+
+
+        <!--FOR LATER USE-->
+
         <!--
-        <tr *ngFor="let order of orders" style="min-width: 80vw;">
-          <td>{{ order.OrderDate }}</td>
-          <td>{{ order.StartDate }}</td>
-          <td>{{ order.EndDate }}</td>
-          <td>
-            <a [routerLink]="['/house', 'details', order.House.HouseId]" id="house-link">
-              {{ order.House.Address }}
-            </a>
-          </td>
-          <td>{{ order.TotalPrice }} NOK</td>
-          <td>
-            <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', order.OrderId]">Update</a>
-            <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', order.OrderId]">Delete</a>
-          </td>
-        </tr>
-        -->
+  <tr *ngFor="let order of orders" style="min-width: 80vw;">
+    <td>{{ order.OrderDate }}</td>
+    <td>{{ order.StartDate }}</td>
+    <td>{{ order.EndDate }}</td>
+    <td>
+      <a [routerLink]="['/house', 'details', order.House.HouseId]" id="house-link">
+        {{ order.House.Address }}
+      </a>
+    </td>
+    <td>{{ order.TotalPrice }} NOK</td>
+    <td>
+      <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', order.OrderId]">Update</a>
+      <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', order.OrderId]">Delete</a>
+    </td>
+  </tr>
+  -->
 
       </table>
     </div>
