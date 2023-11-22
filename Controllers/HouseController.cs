@@ -21,7 +21,7 @@ public class HouseController : Controller
         _db = db;
     }
 
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -33,7 +33,7 @@ public class HouseController : Controller
         }
         return Ok(houses);
     }
-    
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetHousebyId(int id)
@@ -103,7 +103,7 @@ public class HouseController : Controller
 
         bool returnOk = await _houseRepository.Create(house);
 
-        if(returnOk)
+        if (returnOk)
         {
             var response = new { success = true, message = "House " + house.Address + " created successfully" };
             return Ok(response);
@@ -205,6 +205,27 @@ public class HouseController : Controller
         }
 
         return houses;
+    }
+
+    [HttpPost("createDir")]
+    public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg)
+    {
+        string curdir = System.IO.Directory.GetCurrentDirectory();
+        string subpath = curdir + "/ClientApp/src/assets/images/dir1";
+
+        Directory.CreateDirectory(subpath);
+        _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {subpath}");
+
+        string filePath = Path.Combine(subpath, gridImg.FileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            gridImg.CopyTo(stream);
+            _logger.LogInformation($"Image {filePath} copied to stream");
+        }
+
+        var response = new { success = true, message = "Directory created successfully" };
+        return Task.FromResult<IActionResult>(Ok(response));
     }
 
     //function for creating imagefolder for each house and adds gridImage to the folder.

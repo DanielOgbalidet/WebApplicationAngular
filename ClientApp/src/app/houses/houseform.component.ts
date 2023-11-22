@@ -12,6 +12,7 @@ export class HouseformComponent {
   houseForm: FormGroup;
   isEditMode: boolean = false;
   houseId: number = -1;
+  gridImg: File | null = null;
 
   constructor(private _formbuilder: FormBuilder,
     private _router: Router,
@@ -24,39 +25,64 @@ export class HouseformComponent {
       bedrooms: [0],
       guests: [0],
       description: [''],
-      userId: [0]
+      userId: [0],
+      gridImg: [null]
     });
   }
+
+  onFileSelected(event: any): void {
+    const fileInput = event.target;
+    if (fileInput.files.length > 0) {
+      const imgUrl = fileInput.files[0].name;
+      this.houseForm.patchValue({ imageUrl: imgUrl });
+      this.houseForm.patchValue({ gridImg: fileInput.files[0] });
+    }
+  }
+
 
   onSubmit() {
     console.log("HouseCreate form submitted");
     console.log(this.houseForm);
     const newHouse = this.houseForm.value;
+
+    const gridImgControl = this.houseForm.get('gridImg');
+
+    if (gridImgControl && gridImgControl.value) {
+      const gridImg = gridImgControl.value;
+
+      this._houseService.createDirGridImg(gridImg).subscribe(dirResponse => {
+        if (dirResponse.success) {
+          console.log(dirResponse.message);
+          this._router.navigate(['/houses']);
+        } else {
+          console.log('Could not create directory');
+        }
+      });
+    } else {
+      console.log("No image inserted");
+    }
+
     if (this.isEditMode) {
       this._houseService.updateHouse(this.houseId, newHouse)
         .subscribe(response => {
           if (response.success) {
             console.log(response.message);
             this._router.navigate(['/houses']);
-          }
-          else {
+          } else {
             console.log('House update failed');
           }
         });
-    }
-    else {
+    } else {
       this._houseService.createHouse(newHouse).subscribe(response => {
         if (response.success) {
           console.log(response.message);
           this._router.navigate(['/houses']);
-        }
-        else {
+        } else {
           console.log('House creation failed');
         }
       });
     }
   }
-  //const createUrl = "api/house/create";
 
 
   backToHouses() {

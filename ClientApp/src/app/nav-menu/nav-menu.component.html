@@ -5,41 +5,40 @@
 </head>
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light border-bottom box-shadow">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Hostly</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between"
-        [ngClass]="{ show: isExpanded }">
-          <ul class="navbar-nav flex-grow">
-              <li class="nav-item"
-                  [routerLinkActive]="['link-active']"
-                  [routerLinkActiveOptions]="{ exact: true }">
-                  <a id="home" class="nav-link text-dark" [routerLink]="['/']">Home</a>
-              </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                  <a id="houses" class="nav-link text-dark" [routerLink]="['/houses']">Houses</a>
-              </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                  <a id="create" class="nav-link text-dark" [routerLink]="['/fetch-data']">Create listing</a>
-              </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                  <a id="listings" class="nav-link text-dark" [routerLink]="['/fetch-data']">My listings</a>
-              </li>
-              <li class="nav-item" [routerLinkActive]="['link-active']">
-                  <a id="orders" class="nav-link text-dark" [routerLink]="['/Table']">My Orders</a>
-              </li>
-          </ul>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light border-bottom box-shadow">
+        <div class="container">
+            <a class="navbar-brand" [routerLink]="['/']">Hostly</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+                    aria-label="Toggle navigation"
+                    [attr.aria-expanded]="isExpanded"
+                    (click)="toggle()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between"
+                 [ngClass]="{ show: isExpanded }">
+                <ul class="navbar-nav flex-grow">
+                    <li class="nav-item"
+                        [routerLinkActive]="['link-active']"
+                        [routerLinkActiveOptions]="{ exact: true }">
+                        <a id="home" class="nav-link text-dark" [routerLink]="['/']">Home</a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a id="houses" class="nav-link text-dark" [routerLink]="['/houses']">Houses</a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a id="create" class="nav-link text-dark" [routerLink]="['/houseform']">Create listing</a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a id="listings" class="nav-link text-dark" [routerLink]="['/fetch-data']">My listings</a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a id="orders" class="nav-link text-dark" [routerLink]="['/Table']">My Orders</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
