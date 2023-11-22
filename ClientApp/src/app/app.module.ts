@@ -11,6 +11,7 @@ import { HousesComponent } from './houses/Grid/houses.component';
 import { DetailsComponent } from './houses/Details/details.component'
 import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
+import { OrderTableComponent } from './Order/Table.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { HouseformComponent } from './houses/houseform.component';
     HousesComponent,
     DetailsComponent,
     ConvertCurrency,
-    HouseformComponent
+    HouseformComponent,
+    OrderTableComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +36,7 @@ import { HouseformComponent } from './houses/houseform.component';
       { path: 'details', component: DetailsComponent },
       { path: 'houseform', component: HouseformComponent },
       { path: 'houseform/:mode/:id', component: HouseformComponent },
+      { path: 'Table', component: OrderTableComponent },
       { path: '**', redirectTo: '', pathMatch: 'full'},
     ])
   ],
