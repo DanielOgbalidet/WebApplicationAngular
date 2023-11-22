@@ -30,18 +30,18 @@
 
         <!--
   <tr *ngFor="let order of orders" style="min-width: 80vw;">
-    <td>{{ order.OrderDate }}</td>
-    <td>{{ order.StartDate }}</td>
-    <td>{{ order.EndDate }}</td>
+    <td>{{ Order.OrderDate }}</td>
+    <td>{{ Order.StartDate }}</td>
+    <td>{{ Order.EndDate }}</td>
     <td>
       <a [routerLink]="['/house', 'details', order.House.HouseId]" id="house-link">
-        {{ order.House.Address }}
+        {{ Order.House.Address }}
       </a>
     </td>
-    <td>{{ order.TotalPrice }} NOK</td>
+    <td>{{ Order.TotalPrice }} NOK</td>
     <td>
-      <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', order.OrderId]">Update</a>
-      <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', order.OrderId]">Delete</a>
+      <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', Order.OrderId]">Update</a>
+      <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', Order.OrderId]">Delete</a>
     </td>
   </tr>
   -->
