@@ -5,7 +5,7 @@
 <div class="container-fluid" id="details_container" *ngIf="newHouse">
     <div class="row">
         <div id="image-part" class="col-11 col-lg-6 col-md-11">
-            <img src="@Model.ImageUrl" alt="@Model.Address">
+            <img src="{{ newHouse.ImageUrl }}" alt="{{ newHouse.ImageUrl }}">
         </div>
         <div id="info-part" class="col-11 col-lg-6 col-md-11">
             <div class="inner-card">
