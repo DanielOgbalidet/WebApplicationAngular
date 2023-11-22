@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { HousesComponent } from './houses/Grid/houses.component';
-import { DetailsComponent } from './houses/Details/details.component'
+import { DetailsComponent } from './houses/Details/details.component';
 import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
 import { OrderTableComponent } from './Order/Table.component';
@@ -19,7 +19,7 @@ import { OrderTableComponent } from './Order/Table.component';
     NavMenuComponent,
     HomeComponent,
     HousesComponent,
-    DetailsComponent,
+    DetailsComponent, 
     ConvertCurrency,
     HouseformComponent,
     OrderTableComponent,
@@ -33,8 +33,8 @@ import { OrderTableComponent } from './Order/Table.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'houses', component: HousesComponent },
-      { path: 'details', component: DetailsComponent },
       { path: 'houseform', component: HouseformComponent },
+      { path: 'details/:id', component: DetailsComponent },
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'Table', component: OrderTableComponent },
       { path: '**', redirectTo: '', pathMatch: 'full'},

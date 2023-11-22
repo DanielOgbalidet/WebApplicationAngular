@@ -2,8 +2,6 @@
 
 namespace WebApplicationAngular.DAL;
 
-
-
 //An interface to declare methods of obtaining all house objects, getting specific houses by the id and also creating, updating and deletion of houses
 public interface IHouseRepository
 {
