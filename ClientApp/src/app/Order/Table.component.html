@@ -8,7 +8,41 @@
 
 
 
-<body>
-  <h1>Orders</h1>
-</body>
-</html>
+
+<div class="container">
+  <h1>List of Orders</h1>
+  <div class="container-table" style="margin-left: 0px; padding-left: 0px; display: flex; justify-content: flex-start;">
+    <div style="padding-left: 0px;">
+      <table class="table table-hover" style="min-width: 80vw; border: 1px solid #ccc; margin: 0;">
+        <tr class="table-header table-active" style="min-width: 80vw;">
+          <th>Order Date</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+
+        <!--
+        <tr *ngFor="let order of orders" style="min-width: 80vw;">
+          <td>{{ order.OrderDate }}</td>
+          <td>{{ order.StartDate }}</td>
+          <td>{{ order.EndDate }}</td>
+          <td>
+            <a [routerLink]="['/house', 'details', order.House.HouseId]" id="house-link">
+              {{ order.House.Address }}
+            </a>
+          </td>
+          <td>{{ order.TotalPrice }} NOK</td>
+          <td>
+            <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', order.OrderId]">Update</a>
+            <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', order.OrderId]">Delete</a>
+          </td>
+        </tr>
+        -->
+
+      </table>
+    </div>
+  </div>
+</div>
+
