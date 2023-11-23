@@ -1,0 +1,104 @@
+.container {
+  margin-left: 2vw;
+  padding-right: 5vw;
+  padding-top: 3vh;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+}
+
+h1 {
+  padding-bottom: 2vh;
+}
+
+#listings::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  background: black;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 1; /* Set opacity to 1 to make it visible by default */
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.table-container {
+  width: 100%;
+  overflow: auto; /* Important to make the table scrollable in smaller devices */
+  max-height: 75vh;
+}
+
+
+/* Media Query for Phones */
+@media screen and (max-width: 767px) {
+
+  #delete {
+    width: 9.4vh;
+  }
+
+  #update {
+    width: 9.4vh;
+  }
+
+
+  h1 {
+    padding-bottom: 1vh;
+  }
+
+  #listings::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: black;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+}
+
+/* Media Query for iPads */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+
+  #delete {
+    width: 9.4vh;
+  }
+
+
+  #update {
+    width: 9.4vh;
+  }
+
+  .table-container {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    padding-right: 5vw;
+    padding-top: 3vh;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 5vh;
+  }
+
+  h1 {
+    padding-bottom: 2vh;
+  }
+
+  #listings::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background: black;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+}

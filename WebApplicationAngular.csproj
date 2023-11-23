@@ -34,6 +34,7 @@
     <None Remove="ClientApp\src\app\houses\Grid\" />
     <None Remove="ClientApp\src\app\houses\Details\" />
     <None Remove="ClientApp\src\assets\images\dir2\" />
+    <None Remove="ClientApp\src\app\houses\Listings\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +42,7 @@
     <Folder Include="ClientApp\src\app\houses\Grid\" />
     <Folder Include="ClientApp\src\app\houses\Details\" />
     <Folder Include="ClientApp\src\assets\images\dir2\" />
+    <Folder Include="ClientApp\src\app\houses\Listings\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,7 +71,7 @@
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

@@ -35,6 +35,11 @@ export class HouseService {
     return this._http.get(url);
   }
 
+  getListings(userId: number): Observable<IHouse[]> {
+    const url = `${this.baseUrl}/listings/${userId}`;
+    return this._http.get<IHouse[]>(url);
+  }
+
   updateHouse(houseId: number, newHouse: any): Observable<any> {
     const url = `${this.baseUrl}/update/${houseId}`;
     newHouse.houseId = houseId;
