@@ -12,6 +12,7 @@ import { DetailsComponent } from './houses/Details/details.component';
 import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
 import { LoginComponent } from './users/login/login.component';
+import { ListingsComponent } from './houses/Listings/listings.component';
 import { OrderTableComponent } from './Order/Table.component';
 import { RegisterComponent } from './users/register/register.component';
 
@@ -24,6 +25,7 @@ import { RegisterComponent } from './users/register/register.component';
     DetailsComponent, 
     ConvertCurrency,
     HouseformComponent,
+    ListingsComponent, 
     LoginComponent,
     OrderTableComponent,
     RegisterComponent
@@ -38,6 +40,7 @@ import { RegisterComponent } from './users/register/register.component';
       { path: 'houses', component: HousesComponent },
       { path: 'houseform', component: HouseformComponent },
       { path: 'details/:id', component: DetailsComponent },
+      { path: 'listings/:id', component: ListingsComponent },
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'login', component: LoginComponent },
       { path: 'Table', component: OrderTableComponent },
