@@ -4,15 +4,20 @@ using WebApplicationAngular.DAL;
 
 namespace WebApplicationAngular.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+
 public class UserController : Controller
 {
     private readonly HouseDbContext _houseDbContext;
+    private readonly HouseDbContext _db;
     private readonly ILogger<HouseController> _logger;
 
-    public UserController(HouseDbContext houseDbContext, ILogger<HouseController> logger)
+    public UserController(HouseDbContext houseDbContext, ILogger<HouseController> logger, HouseDbContext db)
     {
         _houseDbContext = houseDbContext;
         _logger = logger;
+        _db = db;
     }
 
     [HttpGet]
@@ -48,5 +53,17 @@ public class UserController : Controller
             _logger.LogError($"Error creating user: {ex.Message}");
             return View(user);
         }
+    }
+
+    [HttpGet("login")]
+    public bool Login(string email, string password)
+    {
+        var user = _db.User.FirstOrDefault(x => x.Email == email && x.Password == password);
+
+        if (user == null)
+        {
+            return false;
+        }
+        else return true;
     }
 }

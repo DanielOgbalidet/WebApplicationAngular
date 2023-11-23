@@ -21,6 +21,8 @@ namespace WebApplicationAngular.Models
         public string Number { get; set; } = string.Empty;
         [JsonPropertyName("Email")]
         public string Email { get; set; } = string.Empty;
+        [JsonPropertyName("Password")]
+        public string Password { get; set; } = string.Empty;
         [JsonPropertyName("Houses")]
         public virtual List<House>? Houses { get; set; }
         [JsonPropertyName("Order")]
