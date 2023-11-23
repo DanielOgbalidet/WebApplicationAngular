@@ -13,8 +13,11 @@ export class HousesComponent implements OnInit {
   viewTitle: string = 'Grid';
   displayImage: boolean = true;
   houses: IHouse[] = [];
+  baseImgUrl: string;
 
-  constructor(private _router: Router, private _houseService: HouseService) { }
+  constructor(private _router: Router, private _houseService: HouseService) {
+    this.baseImgUrl = "/assets/images/";
+  }
 
   private _listFilter: string = '';
 
@@ -43,7 +46,7 @@ export class HousesComponent implements OnInit {
         });
     }
   }
-  
+
 
   getHouses(): void {
     this._houseService.getHouses().subscribe(data => {

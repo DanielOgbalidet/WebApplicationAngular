@@ -46,11 +46,13 @@ export class HouseformComponent {
     const newHouse = this.houseForm.value;
 
     const gridImgControl = this.houseForm.get('gridImg');
+    const addressControl = this.houseForm.get('address');
 
-    if (gridImgControl && gridImgControl.value) {
+    if ((gridImgControl && gridImgControl.value) && (addressControl && addressControl.value)) {
       const gridImg = gridImgControl.value;
+      const address = addressControl.value;
 
-      this._houseService.createDirGridImg(gridImg).subscribe(dirResponse => {
+      this._houseService.createDirGridImg(gridImg, address).subscribe(dirResponse => {
         if (dirResponse.success) {
           console.log(dirResponse.message);
           this._router.navigate(['/houses']);

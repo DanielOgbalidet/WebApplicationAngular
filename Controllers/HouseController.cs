@@ -208,15 +208,16 @@ public class HouseController : Controller
     }
 
     [HttpPost("createDir")]
-    public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg)
+    public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg, [FromForm] string address)
     {
         string curdir = System.IO.Directory.GetCurrentDirectory();
-        string subpath = curdir + "/ClientApp/src/assets/images/dir1";
+        string subpath = curdir + "/ClientApp/src/assets/images/";
+        string path = System.IO.Path.Combine(subpath, address);
 
-        Directory.CreateDirectory(subpath);
-        _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {subpath}");
+        Directory.CreateDirectory(path);
+        _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {path}");
 
-        string filePath = Path.Combine(subpath, gridImg.FileName);
+        string filePath = Path.Combine(path, gridImg.FileName);
 
         using (var stream = new FileStream(filePath, FileMode.Create))
         {
