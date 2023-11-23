@@ -23,8 +23,7 @@ import { OrderTableComponent } from './Order/Table.component';
     DetailsComponent, 
     ConvertCurrency,
     HouseformComponent,
-    LoginComponent
-    HouseformComponent,
+    LoginComponent,
     OrderTableComponent,
 
   ],
