@@ -12,7 +12,7 @@
                 <!--Link til details hus, spesifikt hus-->
                 <div class="col" id="Cards">
                     <div class="card">
-                        <img src="{{ baseImgUrl }}{{house.Address}}/{{house.ImageUrl}}" class="card-img-top" alt="{{ house.Address }}">
+                        <img [src]="(house.ImageUrl.length > 0) ? (baseImgUrl + house.Address + '/' + house.ImageUrl) : (baseImgUrl + 'noimg.jpg')" class="card-img-top" alt="{{ house.Address }}" />
                         <div class="card-body">
                             <h5 class="card-title">{{ house.Address }}</h5>
                             <p class="card-price">{{ house.Price | convertCurrency : 'kr.' }}</p>
