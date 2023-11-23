@@ -5,7 +5,8 @@ import { HouseService } from './houses.service';
 
 @Component({
   selector: "app-houses-houseform",
-  templateUrl: "./houseform.component.html"
+  templateUrl: "./houseform.component.html",
+  styleUrls: ['./houseform.component.css']
 })
 
 export class HouseformComponent {
