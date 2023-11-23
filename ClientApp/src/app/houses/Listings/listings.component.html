@@ -31,8 +31,8 @@
                         <img src="listing.ImageUrl" alt="Image" style="max-width: 110px; max-height: 80px;" />
                     </td>
                     <td>
-                        <a id="update" class="btn btn-success btn-sm btn">Update (not)</a>
-                        <a id="delete" class="btn btn-danger btn-sm btn">Delete (not)</a>
+                        <a id="update" [routerLink]="['/houseform/edit', listing.HouseId]" class="btn btn-success btn-sm btn">Update</a>
+                        <a id="delete" class="btn btn-danger btn-sm btn" (click)="deleteHouse(listing)">Delete</a>
                     </td>
                 </tr>
             </tbody>

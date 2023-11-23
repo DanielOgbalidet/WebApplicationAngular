@@ -115,7 +115,7 @@ export class HouseformComponent {
             bedrooms: house.Bedrooms,
             guests: house.Guests,
             description: house.Description,
-            userId: house.UserId
+            userId: house.user.UserId
           });
         },
         (error: any) => {
