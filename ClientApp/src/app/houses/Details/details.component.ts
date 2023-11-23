@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IHouse } from '../house';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../houses.service';
-import { IUser } from '../user';
+import { IUser } from '../../users/user';
 
 @Component({
   selector: 'app-details', // Specify the selector for the component

@@ -1,5 +1,5 @@
 import { IOrder } from "./order";
-import { IUser } from "./user";
+import { IUser } from "../users/user";
 
 export interface IHouse {
   HouseId: number;

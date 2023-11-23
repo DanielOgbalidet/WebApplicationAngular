@@ -18,6 +18,7 @@
       <input type="password" placeholder="Enter Password" name="psw" required [(ngModel)]="password">
 
       <button type="submit">Login</button>
+      <button [routerLink]="['/register']">Register</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>

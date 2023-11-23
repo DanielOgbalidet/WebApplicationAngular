@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplicationAngular.Models;
 using WebApplicationAngular.DAL;
+using BCrypt.Net;
 
 namespace WebApplicationAngular.Controllers;
 
@@ -20,50 +21,44 @@ public class UserController : Controller
         _db = db;
     }
 
-    [HttpGet]
-    public IActionResult CreateUser()
-    {
-        return View();
-    }
-
-    [HttpPost]
+    [HttpPost("createUser")]
     //Method for creating user
-    public async Task<IActionResult> CreateUser(User user)
+    public async Task<IActionResult> CreateUser([FromBody] User user)
     {
         try
         {
-            _logger.LogInformation("Attempting to create a user.");
-            //Check id the user object sent in is valid
-            if (ModelState.IsValid)
-            {
-                //If user is valid, add to database
-                _houseDbContext.User.Add(user);
-                await _houseDbContext.SaveChangesAsync();
-                _logger.LogInformation("User created successfully.");
-                return RedirectToAction("Grid", "House");
-            }
-            else
-            {
-                _logger.LogWarning("Model state is invalid.");
-            }
-            return View(user);
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = hashedPassword;
+
+            _houseDbContext.User.Add(user);
+            await _houseDbContext.SaveChangesAsync();
+            var response = new { success = true, message = "User " + user.Email + " created successfully" };
+            return Ok(response);
         }
-        catch (Exception ex)
+        catch (Exception e) //Error handling if the house dosen't get created
         {
-            _logger.LogError($"Error creating user: {ex.Message}");
-            return View(user);
+            _logger.LogError("User creation failed for user {@user}, error message: {e}", user, e.Message);
+            var response = new { success = false, message = "User creation failed" };
+            return Ok(response);
         }
     }
 
     [HttpGet("login")]
     public bool Login(string email, string password)
     {
-        var user = _db.User.FirstOrDefault(x => x.Email == email && x.Password == password);
+        //Checks for email
+        var user = _db.User.FirstOrDefault(x =>  x.Email == email);
 
+        //If email doesnt exists, return false
         if (user == null)
         {
             return false;
         }
-        else return true;
+        else
+        {
+            //Check hashed password in table against password used for logging in
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            return isPasswordValid;
+        }
     }
 }

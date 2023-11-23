@@ -13,6 +13,7 @@ import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
 import { LoginComponent } from './users/login/login.component';
 import { OrderTableComponent } from './Order/Table.component';
+import { RegisterComponent } from './users/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { OrderTableComponent } from './Order/Table.component';
     HouseformComponent,
     LoginComponent,
     OrderTableComponent,
-
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,6 +41,7 @@ import { OrderTableComponent } from './Order/Table.component';
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'login', component: LoginComponent },
       { path: 'Table', component: OrderTableComponent },
+      { path: 'register', component: RegisterComponent},
       { path: '**', redirectTo: '', pathMatch: 'full'},
     ])
   ],

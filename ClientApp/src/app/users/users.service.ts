@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IUser } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +23,8 @@ export class UserService {
     return this._http.get<boolean>(url, { params })
   }
 
+  createUser(newUser: IUser): Observable<any> {
+    const createUrl = 'api/user/createUser';
+    return this._http.post<any>(createUrl, newUser);
+  }
 }

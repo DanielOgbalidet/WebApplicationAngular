@@ -1,4 +1,4 @@
-<form [formGroup]="register" (ngSubmit)="onSubmit()">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="firstName">First Name <i class="bi bi-cash-coin"></i></label>
     <input id="firstName" class="form-control" formControlName="firstName" />
@@ -16,7 +16,12 @@
     <input id="number" class="form-control" formControlName="number" />
   </div>
   <div class="form-group">
-    <label for="email">Price <i class="bi bi-cash-coin"></i></label>
-    <input id="price" class="form-control" formControlName="price" />
+    <label for="email">Email <i class="bi bi-cash-coin"></i></label>
+    <input id="email" class="form-control" formControlName="email" />
   </div>
+  <div class="form-group">
+    <label for="password">Password <i class="bi bi-cash-coin"></i></label>
+    <input id="password" class="form-control" formControlName="password" />
+  </div>
+  <button type="submit">Register</button>
 </form>
