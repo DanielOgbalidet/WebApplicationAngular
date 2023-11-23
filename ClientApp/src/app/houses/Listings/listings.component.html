@@ -5,34 +5,37 @@
 
 <div class="container">
     <h1>My listings</h1>
-
     <div class="table-container">
         <table class='table table-hover' style='border: 1px solid #ccc; margin: 0 auto;'>
-            <tr class="table-active">
-                <th>Address</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Bedrooms</th>
-                <th>Guests</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-            <tr *ngFor='let listing of myListings'>
-                <td>
-                    <a [routerLink]="['/details', listing.HouseId]" id="house-link">{{ listing.Address }}</a>
-                </td>
-                <td>{{ listing.Price | convertCurrency : 'kr.' }}</td>
-                <td>{{ listing.Description }}</td>
-                <td>{{ listing.Bedrooms }}</td>
-                <td>{{ listing.Guests }}</td>
-                <td>
-                    <img src="listing.ImageUrl" alt="House Image" style="max-width: 80px; max-height: 80px;" />
-                </td>
-                <td>
-                    <a id="update" class="btn btn-success btn-sm btn">Update (not)</a>
-                    <a id="delete" class="btn btn-danger btn-sm btn">Delete (not)</a>
-                </td>
-            </tr>
+            <thead>
+                <tr class="table-active">
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Bedrooms</th>
+                    <th>Guests</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let listing of myListings'>
+                    <td>
+                        <a [routerLink]="['/details', listing.HouseId]" id="house-link">{{ listing.Address }}</a>
+                    </td>
+                    <td>{{ listing.Price | convertCurrency : 'kr.' }}</td>
+                    <td>{{ listing.Description }}</td>
+                    <td>{{ listing.Bedrooms }}</td>
+                    <td>{{ listing.Guests }}</td>
+                    <td>
+                        <img src="listing.ImageUrl" alt="Image" style="max-width: 110px; max-height: 80px;" />
+                    </td>
+                    <td>
+                        <a id="update" class="btn btn-success btn-sm btn">Update (not)</a>
+                        <a id="delete" class="btn btn-danger btn-sm btn">Delete (not)</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
