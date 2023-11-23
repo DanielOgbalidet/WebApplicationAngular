@@ -27,6 +27,7 @@
     <None Remove="ClientApp\src\app\houses\houseform.component.ts" />
     <None Remove="ClientApp\src\app\users\login\login.component.ts" />
     <None Remove="ClientApp\src\app\shared\convertPipe.ts" />
+    <None Remove="ClientApp\src\app\users\register\register.component.ts" />
     <None Remove="ClientApp\src\app\users\users.service.ts" />
     <None Remove="ClientApp\src\assets\images\" />
     <None Remove="ClientApp\src\app\houses\Grid\" />
@@ -46,6 +47,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\houses\houseform.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\users\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\convertPipe.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\users\register\register.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\users\users.service.ts" />
   </ItemGroup>
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,0 +1,22 @@
+<form [formGroup]="register" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="firstName">First Name <i class="bi bi-cash-coin"></i></label>
+    <input id="firstName" class="form-control" formControlName="firstName" />
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last Name <i class="bi bi-cash-coin"></i></label>
+    <input id="lastName" class="form-control" formControlName="lastName" />
+  </div>
+  <div class="form-group">
+    <label for="address">Address <i class="bi bi-cash-coin"></i></label>
+    <input id="address" class="form-control" formControlName="address" />
+  </div>
+  <div class="form-group">
+    <label for="number">Number <i class="bi bi-cash-coin"></i></label>
+    <input id="number" class="form-control" formControlName="number" />
+  </div>
+  <div class="form-group">
+    <label for="email">Price <i class="bi bi-cash-coin"></i></label>
+    <input id="price" class="form-control" formControlName="price" />
+  </div>
+</form>
