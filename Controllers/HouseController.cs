@@ -191,6 +191,7 @@ public class HouseController : Controller
     }
 
     //Find all houses that was created by a specific user
+    [HttpGet("listings/{id}")]
     public List<House> GetHousesByUserId(int id)
     {
         var houses = _db.Houses.Where(h => h.UserId == id).ToList();
