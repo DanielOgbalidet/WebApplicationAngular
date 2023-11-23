@@ -3,16 +3,16 @@
     <div class='row'>
         <div id="filterText" class='col-md-1'>Address: </div>
         <div id="filterInput" class='col-md-4'>
-            <input id="inputAddress" type='text'[(ngModel)]='listFilter'/>
+            <input id="inputAddress" type='text' [(ngModel)]='listFilter' />
         </div>
     </div>
     <div class="row g-4">
         <div *ngFor='let house of filteredHouses' class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <a id="link" [routerLink]="['/details']">
+            <a id="link" [routerLink]="['/details', house.HouseId]">
                 <!--Link til details hus, spesifikt hus-->
                 <div class="col" id="Cards">
                     <div class="card">
-                        <img src="house.ImageUrl" class="card-img-top" alt="house.Address">
+                        <img src="{{ baseImgUrl }}{{house.Address}}/{{house.ImageUrl}}" class="card-img-top" alt="{{ house.Address }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ house.Address }}</h5>
                             <p class="card-price">{{ house.Price | convertCurrency : 'kr.' }}</p>
@@ -23,5 +23,3 @@
         </div>
     </div>
 </div>
-
-

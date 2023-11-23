@@ -21,6 +21,15 @@ export class HouseService {
     return this._http.post<any>(createUrl, newHouse);
   }
 
+  createDirGridImg(imgFile: File, address: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('gridImg', imgFile);
+    formData.append('address', address);
+
+    const gridImgUrl = 'api/house/createDir';
+    return this._http.post<any>(gridImgUrl, formData);
+  }
+
   getHouseById(houseId: number): Observable<any> {
     const url = `${this.baseUrl}/${houseId}`;
     return this._http.get(url);

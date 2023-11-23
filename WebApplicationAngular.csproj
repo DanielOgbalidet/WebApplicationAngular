@@ -31,12 +31,14 @@
     <None Remove="ClientApp\src\assets\images\" />
     <None Remove="ClientApp\src\app\houses\Grid\" />
     <None Remove="ClientApp\src\app\houses\Details\" />
+    <None Remove="ClientApp\src\assets\images\dir2\" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\images\" />
     <Folder Include="ClientApp\src\app\houses\Grid\" />
     <Folder Include="ClientApp\src\app\houses\Details\" />
+    <Folder Include="ClientApp\src\assets\images\dir2\" />
   </ItemGroup>
 
   <ItemGroup>

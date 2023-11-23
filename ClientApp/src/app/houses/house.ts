@@ -1,3 +1,6 @@
+import { IOrder } from "./order";
+import { IUser } from "./user";
+
 export interface IHouse {
   HouseId: number;
   Price: number;
@@ -7,4 +10,6 @@ export interface IHouse {
   Guests: number;
   Description: string;
   UserId: number;
-} 
+  User: IUser;
+  Order: IOrder[]; 
+}

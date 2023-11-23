@@ -8,10 +8,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { HousesComponent } from './houses/Grid/houses.component';
-import { DetailsComponent } from './houses/Details/details.component'
+import { DetailsComponent } from './houses/Details/details.component';
 import { ConvertCurrency } from './shared/convertPipe';
 import { HouseformComponent } from './houses/houseform.component';
 import { LoginComponent } from './users/login/login.component';
+import { OrderTableComponent } from './Order/Table.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,13 @@ import { LoginComponent } from './users/login/login.component';
     NavMenuComponent,
     HomeComponent,
     HousesComponent,
-    DetailsComponent,
+    DetailsComponent, 
     ConvertCurrency,
     HouseformComponent,
     LoginComponent
+    HouseformComponent,
+    OrderTableComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,10 +36,11 @@ import { LoginComponent } from './users/login/login.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'houses', component: HousesComponent },
-      { path: 'details', component: DetailsComponent },
       { path: 'houseform', component: HouseformComponent },
+      { path: 'details/:id', component: DetailsComponent },
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'Table', component: OrderTableComponent },
       { path: '**', redirectTo: '', pathMatch: 'full'},
     ])
   ],
