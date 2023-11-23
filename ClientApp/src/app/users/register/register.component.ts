@@ -32,6 +32,7 @@ export class RegisterComponent {
 
   onSubmit() {
     const newUser = this.userForm.value;
+    //newUser.email = newUser.email.toLowerCase();
 
     this._userService.createUser(newUser).subscribe(response => {
       if (response.success) {
