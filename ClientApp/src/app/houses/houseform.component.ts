@@ -5,7 +5,8 @@ import { HouseService } from './houses.service';
 
 @Component({
   selector: "app-houses-houseform",
-  templateUrl: "./houseform.component.html"
+  templateUrl: "./houseform.component.html",
+  styleUrls: ['./houseform.component.css']
 })
 
 export class HouseformComponent {
@@ -13,6 +14,7 @@ export class HouseformComponent {
   isEditMode: boolean = false;
   houseId: number = -1;
   gridImg: File | null = null;
+  moreImg: File[] | null = null;
 
   constructor(private _formbuilder: FormBuilder,
     private _router: Router,
@@ -25,8 +27,9 @@ export class HouseformComponent {
       bedrooms: [0],
       guests: [0],
       description: [''],
-      userId: [0],
-      gridImg: [null]
+      userId: [1],
+      gridImg: [null],
+      moreImg: [[null]]
     });
   }
 
@@ -39,6 +42,12 @@ export class HouseformComponent {
     }
   }
 
+  onMoreImgSelected(event: any): void {
+    const moreImgs = event.target;
+    if (moreImgs.files.length > 0) {
+      this.houseForm.patchValue({ moreImg: moreImgs.files });
+    }
+  }
 
   onSubmit() {
     console.log("HouseCreate form submitted");
@@ -47,21 +56,34 @@ export class HouseformComponent {
 
     const gridImgControl = this.houseForm.get('gridImg');
     const addressControl = this.houseForm.get('address');
+    const moreImgControl = this.houseForm.get('moreImg');
 
-    if ((gridImgControl && gridImgControl.value) && (addressControl && addressControl.value)) {
-      const gridImg = gridImgControl.value;
+    if (addressControl && addressControl.value) {
       const address = addressControl.value;
 
-      this._houseService.createDirGridImg(gridImg, address).subscribe(dirResponse => {
-        if (dirResponse.success) {
-          console.log(dirResponse.message);
-          this._router.navigate(['/houses']);
-        } else {
-          console.log('Could not create directory');
-        }
-      });
-    } else {
-      console.log("No image inserted");
+      if ((gridImgControl && gridImgControl.value)) {
+        const gridImg = gridImgControl.value;
+
+        this._houseService.createDirGridImg(gridImg, address).subscribe(dirResponse => {
+          if (dirResponse.success) {
+            console.log(dirResponse.message);
+          } else {
+            console.log('Could not create directory');
+          }
+        });
+      }
+
+      if (moreImgControl && moreImgControl.value) {
+        const images = moreImgControl.value;
+        console.log("MORE_IMG_VALS: ", moreImgControl?.value);
+        this._houseService.uploadImages(images, address).subscribe(imgResponse => {
+          if (imgResponse.success) {
+            console.log(imgResponse.message);
+          } else {
+            console.log("Wrong");
+          }
+        });
+      }
     }
 
     if (this.isEditMode) {
@@ -85,6 +107,7 @@ export class HouseformComponent {
       });
     }
   }
+
 
 
   backToHouses() {
@@ -115,7 +138,7 @@ export class HouseformComponent {
             bedrooms: house.Bedrooms,
             guests: house.Guests,
             description: house.Description,
-            userId: house.UserId
+            userId: house.user.UserId
           });
         },
         (error: any) => {

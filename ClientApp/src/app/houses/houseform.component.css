@@ -1,0 +1,34 @@
+.container {
+  margin-left: 2vw;
+  padding-right: 5vw;
+  padding-top: 3vh;
+  padding-left: 0vw;
+  padding-right: 0vw;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+  max-width: 70vw;
+}
+
+h1 {
+  margin-bottom: 2.5vh;
+}
+
+#save {
+  margin-top: 1.5vh;
+  margin-right: 0.5vw;
+}
+
+#cancel {
+  margin-top: 1.5vh;
+  margin-left: 0.5vw;
+}
+
+.form-group {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width: 70vw;
+}
+
+label {
+  margin-bottom: 1vh;
+}

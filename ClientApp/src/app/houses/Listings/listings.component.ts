@@ -28,6 +28,22 @@ export class ListingsComponent implements OnInit {
     });
   }
 
+  deleteHouse(house: IHouse): void {
+    const confirmDelete = confirm(`Are you sure you want to delete "${house.Address}"`);
+    if (confirmDelete) {
+      this._houseService.deleteHouse(house.HouseId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log("House deleted", response.message);
+            window.location.reload(); 
+          }
+        },
+        (error) => {
+          console.error('Error deleting house:', error);
+        });
+    }
+  }
+
   getMyListings(userId: number) {
     console.log("Get listings started");
     this._houseService.getListings(this.userId)

@@ -26,8 +26,18 @@ export class HouseService {
     formData.append('gridImg', imgFile);
     formData.append('address', address);
 
-    const gridImgUrl = 'api/house/createDir';
+    const gridImgUrl = 'api/house/createDirGridImg';
     return this._http.post<any>(gridImgUrl, formData);
+  }
+
+  uploadImages(images: File[], address: string): Observable<any> {
+    const formData = new FormData();
+    for (let i = 0; i < images.length; i++) {
+      formData.append('imageFiles', images[i])
+    }
+    formData.append('address', address);
+    const uploadImgUrl = 'api/house/uploadImg';
+    return this._http.post<any>(uploadImgUrl, formData);
   }
 
   getHouseById(houseId: number): Observable<any> {

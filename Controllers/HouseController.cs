@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using WebApplicationAngular.DAL;
 using WebApplicationAngular.Models;
 
@@ -47,51 +48,7 @@ public class HouseController : Controller
         return Ok(house);
     }
 
-    /*
-    //post-mothod for creating an house, needs to be authorized to use,
-    //takes an house-object, creators email, an grid-image and a list of
-    //images for the detail-view as arguments
-    [HttpPost("create")]
-    [Authorize]
-    //Method for creating a new house
-    public async Task<IActionResult> Create([FromBody] House house, String email, IFormFile? gridImage, List<IFormFile>? moreImg)
-    {
-        //gets users id through the ShowUserId-function
-        int user = ShowUserId(email);
-        house.UserId = user;
 
-        //sets House´s ImageUrl as the gridImage´s name if an gridImage is inserted
-        if (gridImage != null)
-        {
-            house.ImageUrl = gridImage.FileName;
-        }
-
-        //Check if attributes are valid
-        if (ModelState.IsValid)
-        {
-            CreateDirGridImg(house.Address, gridImage); //calls the function for creation of imagefolder
-
-            //if one of more images are inserted in the moreImg-list, UplodImages are called
-            if (moreImg != null && moreImg.Count > 0)
-            {
-                UploadImages(moreImg, house.Address);
-            }
-        }
-        //Creates and adds a new house to the database
-        bool returnOk = await _houseRepository.Create(house);
-        if (returnOk)
-        {
-            var response = new { success = true, message = "House " + house.Address + " created successfully" };
-            return Ok(response);
-        }
-        else
-        {
-            var response = new { success = false, message = "House creation failed" };
-            return Ok(response);
-        }
-
-    }
-    */
 
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] House house)
@@ -114,17 +71,6 @@ public class HouseController : Controller
             return Ok(response);
         }
     }
-
-    /*
-    private static int GetNextHouseId()
-    {
-        if (Houses.Count == 0)
-        {
-            return 1;
-        }
-        return Houses.Max(house => house.HouseId) + 1;
-    }
-    */
 
     [HttpPut("update/{id}")]
     public async Task<IActionResult> Update(House house)
@@ -150,12 +96,27 @@ public class HouseController : Controller
     [HttpDelete("delete/{id}")]
     public async Task<IActionResult> DeleteHouse(int id)
     {
+        House houseToDelete = await _houseRepository.GetHouseById(id);
         bool returnOk = await _houseRepository.Delete(id);
+        var houseAddress = houseToDelete.Address;
+        _logger.LogError("Husadressen da: ", houseAddress);
+
+        //string-builder for path to the right directory
+        string curdir = System.IO.Directory.GetCurrentDirectory();
+        string subpath = curdir + "/ClientApp/src/assets/images/";
+        string delPath = System.IO.Path.Combine(subpath, houseAddress);
+
         if (!returnOk)
         {
             _logger.LogError("[HouseController] House deletion failed for the HouseId {HouseId:0000}", id);
             return BadRequest("House deletion failed");
         }
+
+        if (Directory.Exists(delPath))
+        {
+            Directory.Delete(delPath, true);
+        }
+
         var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
         return Ok(response);
     }
@@ -208,35 +169,38 @@ public class HouseController : Controller
         return houses;
     }
 
-    [HttpPost("createDir")]
-    public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg, [FromForm] string address)
-    {
-        string curdir = System.IO.Directory.GetCurrentDirectory();
-        string subpath = curdir + "/ClientApp/src/assets/images/";
-        string path = System.IO.Path.Combine(subpath, address);
+    /*
+           [HttpPost("createDir")]
+           public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg, [FromForm] string address)
+           {
+               string curdir = System.IO.Directory.GetCurrentDirectory();
+               string subpath = curdir + "/ClientApp/src/assets/images/";
+               string path = System.IO.Path.Combine(subpath, address);
 
-        Directory.CreateDirectory(path);
-        _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {path}");
+               Directory.CreateDirectory(path);
+               _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {path}");
 
-        string filePath = Path.Combine(path, gridImg.FileName);
+               string filePath = Path.Combine(path, gridImg.FileName);
 
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            gridImg.CopyTo(stream);
-            _logger.LogInformation($"Image {filePath} copied to stream");
-        }
+               using (var stream = new FileStream(filePath, FileMode.Create))
+               {
+                   gridImg.CopyTo(stream);
+                   _logger.LogInformation($"Image {filePath} copied to stream");
+               }
 
-        var response = new { success = true, message = "Directory created successfully" };
-        return Task.FromResult<IActionResult>(Ok(response));
-    }
+               var response = new { success = true, message = "Directory created successfully" };
+               return Task.FromResult<IActionResult>(Ok(response));
+           }
+       */
 
     //function for creating imagefolder for each house and adds gridImage to the folder.
     //Takes the houses´ address and gridImage as arguments
-    public void CreateDirGridImg(string address, IFormFile gridImage)
+    [HttpPost("createDirGridImg")]
+    public Task<IActionResult> CreateDirGridImg([FromForm] IFormFile gridImg, [FromForm] string address)
     {
         //string-builder for path to the right directory
         string curdir = System.IO.Directory.GetCurrentDirectory();
-        string subpath = curdir + "/wwwroot/images/";
+        string subpath = curdir + "/ClientApp/src/assets/images/";
         string path = System.IO.Path.Combine(subpath, address);
 
         // Creates new folder if it doesnt exist. Only true when creating new house
@@ -246,16 +210,16 @@ public class HouseController : Controller
             _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {path}");
 
             //checks if an gridImage is inserted in the creation of the new house
-            if (gridImage != null && gridImage.Length > 0)
+            if (gridImg != null && gridImg.Length > 0)
             {
                 try
                 {
                     //add the gridimage to the new folder by creating the path and copies to stream
-                    string filePath = Path.Combine(path, gridImage.FileName);
+                    string filePath = Path.Combine(path, gridImg.FileName);
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        gridImage.CopyTo(stream);
+                        gridImg.CopyTo(stream);
                         _logger.LogInformation($"Image {filePath} copied to stream");
                     }
 
@@ -266,21 +230,23 @@ public class HouseController : Controller
                     _logger.LogError("Error while trying to save image: " + e.Message);
                 }
             }
+            var responsetrue = new { success = true, message = "Directory created successfully" };
+            return Task.FromResult<IActionResult>(Ok(responsetrue));
         }
         //if houses´ folder already excists
         else
         {
             //True if a new gridImage is chosen
-            if (gridImage != null && gridImage.Length > 0)
+            if (gridImg != null && gridImg.Length > 0)
             {
                 try
                 {
                     //add the gridimage to the new folder by creating the path and copies to stream
-                    string filePath = Path.Combine(path, gridImage.FileName);
+                    string filePath = Path.Combine(path, gridImg.FileName);
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        gridImage.CopyTo(stream);
+                        gridImg.CopyTo(stream);
                         _logger.LogInformation($"Image {filePath} copied to stream");
                     }
 
@@ -292,17 +258,19 @@ public class HouseController : Controller
                 }
             }
         }
-
+        var response = new { success = true, message = "Directory already exist" };
+        return Task.FromResult<IActionResult>(Ok(response));
     }
 
-    public void UploadImages(List<IFormFile> imageFiles, string address)
+    [HttpPost("uploadImg")]
+    public void UploadImages([FromForm] List<IFormFile> imageFiles, [FromForm] string address)
     {
         //only true if one or more images are inserted
         if (imageFiles != null && imageFiles.Count > 0)
         {
             //string-builder for path to the right directory
             string curdir = System.IO.Directory.GetCurrentDirectory();
-            string subpath = curdir + "/wwwroot/images/";
+            string subpath = curdir + "/ClientApp/src/assets/images/";
             string folderpath = System.IO.Path.Combine(subpath, address);
 
             //loops through each image in the inserted image-list
