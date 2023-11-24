@@ -12,10 +12,12 @@ import { HouseService } from '../houses.service';
 export class ListingsComponent implements OnInit {
   myListings: IHouse[] = [];
   userId: number = -1;
+  baseImgUrl: string;
 
   constructor(private _router: Router,
     private _houseService: HouseService,
     private _route: ActivatedRoute) {
+    this.baseImgUrl = "/assets/images/";
   }
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class ListingsComponent implements OnInit {
         (response) => {
           if (response.success) {
             console.log("House deleted", response.message);
-            window.location.reload(); 
+            window.location.reload();
           }
         },
         (error) => {

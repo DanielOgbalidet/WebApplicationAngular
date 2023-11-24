@@ -273,6 +273,12 @@ public class HouseController : Controller
             string subpath = curdir + "/ClientApp/src/assets/images/";
             string folderpath = System.IO.Path.Combine(subpath, address);
 
+            if (!Directory.Exists(folderpath))
+            {
+                Directory.CreateDirectory(folderpath);
+                _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {folderpath}");
+            }
+
             //loops through each image in the inserted image-list
             foreach (var imageFile in imageFiles)
             {

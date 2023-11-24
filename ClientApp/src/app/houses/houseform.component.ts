@@ -22,10 +22,10 @@ export class HouseformComponent {
     private _route: ActivatedRoute) {
     this.houseForm = _formbuilder.group({
       address: ['', Validators.required],
-      price: [0, Validators.required],
+      price: [null, Validators.required],
       imageUrl: [''],
-      bedrooms: [0],
-      guests: [0],
+      bedrooms: [null],
+      guests: [null],
       description: [''],
       userId: [1],
       gridImg: [null],

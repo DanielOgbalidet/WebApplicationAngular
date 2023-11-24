@@ -28,7 +28,7 @@
                     <td>{{ listing.Bedrooms }}</td>
                     <td>{{ listing.Guests }}</td>
                     <td>
-                        <img src="listing.ImageUrl" alt="Image" style="max-width: 110px; max-height: 80px;" />
+                        <img [src]="(listing.ImageUrl.length > 0) ? (baseImgUrl + listing.Address + '/' + listing.ImageUrl) : (baseImgUrl + 'noimg.jpg')" alt="{{ listing.Address }}" style="width: 90px; height: 50px;" />
                     </td>
                     <td>
                         <a id="update" [routerLink]="['/houseform/edit', listing.HouseId]" class="btn btn-success btn-sm btn">Update</a>
