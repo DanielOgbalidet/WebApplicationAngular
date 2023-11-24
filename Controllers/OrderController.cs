@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApplicationAngular.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+
 public class OrderController : Controller
 {
     private readonly IOrderRepository _orderRepository;
@@ -19,7 +22,7 @@ public class OrderController : Controller
         _orderRepository = orderRepository;
     }
 
-    [HttpPost("createorder")]
+    [HttpPost("createOrder")]
     //Method that creates a new order
     public async Task<IActionResult> CreateOrder(String trip_start, String trip_end, int inHouseId, int inTotalPrice, String email)
     {
