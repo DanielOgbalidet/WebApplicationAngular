@@ -1,53 +1,43 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title></title>
-</head>
-
-
-
-
 <div class="container">
-  <h1>List of Orders</h1>
-  <div class="container-table" style="margin-left: 0px; padding-left: 0px; display: flex; justify-content: flex-start;">
-    <div style="padding-left: 0px;">
-      <table class="table table-hover" style="min-width: 80vw; border: 1px solid #ccc; margin: 0;">
-        <tr class="table-header table-active" style="min-width: 80vw;">
-          <th>Order Date</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Address</th>
-          <th>Price</th>
-          <th>Actions</th>
-        </tr>
-
-
-
-
-        <!--FOR LATER USE-->
-
-        <!--
-  <tr *ngFor="let order of orders" style="min-width: 80vw;">
-    <td>{{ Order.OrderDate }}</td>
-    <td>{{ Order.StartDate }}</td>
-    <td>{{ Order.EndDate }}</td>
-    <td>
-      <a [routerLink]="['/house', 'details', order.House.HouseId]" id="house-link">
-        {{ Order.House.Address }}
-      </a>
-    </td>
-    <td>{{ Order.TotalPrice }} NOK</td>
-    <td>
-      <a id="update" class="btn btn-success btn-sm btn" [routerLink]="['/update', Order.OrderId]">Update</a>
-      <a id="delete" class="btn btn-danger btn-sm btn" [routerLink]="['/delete', Order.OrderId]">Delete</a>
-    </td>
-  </tr>
-  -->
-
-      </table>
+    <h1>List of Orders</h1>
+    <div class="container-table" style="margin-left:0px; padding-left: 0px; display: flex; justify-content: flex-start;">
+        <div style="padding-left: 0px;">
+            <table class='table table-hover' style='min-width: 80vw; border: 1px solid #ccc; margin: 0;'>
+                <thead>
+                    <tr class="table-header table-active" style='min-width: 80vw; '>
+                        <th>Order Date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Address</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="min-width: 80vw;">
+                        <!--*ngFor="let order of orders"-->
+                        <td><!--Order.OrderDate -->H</td>
+                        <td><!--Order.StartDate -->H</td>
+                        <td><!--Order.EndDate-->H</td>
+                            <td>
+                                <a id="house-link">
+                                    <!--[routerLink]="['/house', 'details', order.House.HouseId]"-->
+                                    H<!--Order.House.Address-->
+                                </a>
+                            </td>
+                            <td>H<!--Order.TotalPrice--></td>
+                            <td>
+                                <a id="update" class="btn btn-success btn-sm btn">Update</a>
+                                <a id="delete" class="btn btn-danger btn-sm btn">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+
+
+
 

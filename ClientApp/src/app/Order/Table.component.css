@@ -1,2 +1,85 @@
-﻿body {
+﻿.container {
+  margin-left: 2vw;
+  padding-right: 5vw;
+  padding-top: 3vh;
+  padding-left: 0vw;
+  padding-right: 0vw;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+}
+
+.container-table {
+  margin-left: 2vw;
+  padding-right: 5vw;
+  padding-left: 0vw;
+  padding-right: 0vw;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+}
+
+h1 {
+  padding-bottom: 2vh;
+}
+
+#order {
+  border: 5px solid #ccc;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-right: 1vh;
+  padding-left: 1vh;
+  margin-bottom: 20px;
+}
+
+table {
+  max-width: 60vw;
+}
+
+#orders::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  background: black;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 1; /* Set opacity to 1 to make it visible by default */
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+
+.container-table {
+  width: 100%;
+  overflow: auto; /* Important to make the table scrollable in smaller devices */
+  max-height: 400px;
+}
+
+
+/* Media Query for Phones */
+@media screen and (max-width: 767px) {
+
+
+
+  #delete {
+    width: 9.4vh;
+  }
+
+  #update {
+    width: 9.4vh;
+  }
+}
+
+
+/* Media Query for iPads */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+
+  #delete {
+    width: 9.4vh;
+  }
+
+
+  #update {
+    width: 9.4vh;
+  }
 }

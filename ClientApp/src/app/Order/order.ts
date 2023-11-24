@@ -1,4 +1,4 @@
-import { IHouse } from "./house";
+import { IHouse } from "../houses/house";
 import { IUser } from "../users/user";
 
 export interface IOrder {
