@@ -11,57 +11,18 @@ public class OrderController : Controller
     private readonly IOrderRepository _orderRepository;
     private readonly HouseDbContext _houseDbContext;
     private readonly ILogger<HouseController> _logger;
-    private readonly UserManager<IdentityUser> _userManager;
 
-    public OrderController(HouseDbContext houseDbContext, ILogger<HouseController> logger, IOrderRepository orderRepository, UserManager<IdentityUser> userManager)
+    public OrderController(HouseDbContext houseDbContext, ILogger<HouseController> logger, IOrderRepository orderRepository)
     {
         _houseDbContext = houseDbContext;
         _logger = logger;
         _orderRepository = orderRepository;
-        _userManager = userManager;
     }
 
-
-    //Show all orders a sepcific user made
-    public async Task<IActionResult> Table(String email)
-    {
-        //If user is sent to orders from login
-        if (string.IsNullOrEmpty(email))
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user != null)
-            {
-                email = user.Email;
-            }
-        }
-        //Find specific user
-        int id = ShowUserId(email);
-        //Find all orders from user
-        var orders = GetOrdersByUserId(id);
-        if (orders == null)
-        {
-            _logger.LogError("Orders list not found while executing GetOrdersByUserId");
-            return NotFound("Order list not found");
-        }
-        return View(orders);
-    }
-
-    [HttpGet("{inHouseId}")]
-    public IActionResult CreateOrder(int inHouseId)
-    {
-        return RedirectToAction("Details", "House", new { id = inHouseId });
-    }
-
-    [HttpPost]
+    [HttpPost("createorder")]
     //Method that creates a new order
     public async Task<IActionResult> CreateOrder(String trip_start, String trip_end, int inHouseId, int inTotalPrice, String email)
     {
-        //Check that the user chose more than 0 days
-        if (inTotalPrice == 0)
-        {
-            return RedirectToAction("Details", "House", new { id = inHouseId });
-        }
-
         try
         {
             int inUserId = ShowUserId(email);
@@ -83,60 +44,42 @@ public class OrderController : Controller
             //Add the new order to the database
             _houseDbContext.Order.Add(order);
             await _houseDbContext.SaveChangesAsync();
-            return RedirectToAction("Table", "Order", new { email = email });
+            var response = new { success = true, message = "Order created successfully" };
+            return Ok(response);
         }
 
         catch
         {
             _logger.LogError($"Order creation failed");
-            return BadRequest("Order creation failed");
+            var response = new { success = false, message = "Order creation failed" };
+            return Ok(response);
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Update(int id)
+    [HttpPut("updateOrder/{id}")]
+    //Update order
+    public async Task<IActionResult> UpdateOrder(Order order)
     {
-        //Find the specific order
-        var order = await _orderRepository.GetOrderById(id);
         if (order == null)
         {
-            _logger.LogError("[OrderController] Order not found when updating the OrderId {OrderId: }", id);
-            return BadRequest("Order not found for the OrderId");
+            return BadRequest("Invalid order data.");
         }
-        return View(order);
-    }
-
-    [HttpPost]
-    //Update order
-    public async Task<IActionResult> Update(Order order, String email)
-    {
-        //Try to update an order
         bool returnOk = await _orderRepository.Update(order);
         if (returnOk)
         {
-            return RedirectToAction("Table", "Order", new { email = email });
+            var response = new { success = true, message = "Order updated successfully" };
+            return Ok(response);
         }
-        _logger.LogWarning("[OrderController] Order update failed {@order}", order);
-        return View(order);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        //Find specific order
-        var order = await _orderRepository.GetOrderById(id);
-        if (order == null)
+        else
         {
-            //Error message if it fails
-            _logger.LogError("[OrderController] Order not found for the orderId {@OrderId:0000}", id);
-            return BadRequest("Order not found for the OrderId");
+            _logger.LogError("[OrderController] Order update failed");
+            var response = new { success = false, message = "Order creation failed" };
+            return Ok(response);
         }
-        return View(order);
     }
 
-    [HttpPost]
- 
-    public async Task<IActionResult> DeleteConfirmed(int id, string email)
+    [HttpDelete("deleteOrder/{id}")]
+    public async Task<IActionResult> DeleteOrder(int id)
     {
         //Try to delete order
         bool returnOk = await _orderRepository.Delete(id);
@@ -144,9 +87,13 @@ public class OrderController : Controller
         {
             //Error message if it fails
             _logger.LogError("[OrderController] Order deletion failed for the OrderId {OrderId:0000}", id);
-            return BadRequest("Order deletion failed for this orderId");
+            var response = new { success = true, message = "Order updated successfully" };
+            return Ok(response);
+        } else
+        {
+            var response = new { success = true, message = "Order " + id.ToString() + " deleted successfully" };
+            return Ok(response);
         }
-        return RedirectToAction("Table", "Order", new { email = email });
     }
 
     //Find user from database
