@@ -5,7 +5,17 @@
 <div class="container-fluid" id="details_container" *ngIf="!isObjectEmpty(newHouse)">
     <div class="row">
         <div id="image-part" class="col-11 col-lg-6 col-md-11">
-            <img src="{{ newHouse.ImageUrl }}" alt="{{ newHouse.ImageUrl }}">
+            <ng-container *ngIf="numberOfFiles === 0">
+                <img [src]="(baseImgUrl + 'noimg.jpg')" alt="{{ newHouse.ImageUrl }}" style="max-width: 100%;">
+            </ng-container>
+            <ng-container *ngIf="numberOfFiles === 1">
+                <!-- Muligens sette inn bilde nr[0] i stedenfor ImageUrl -->
+                <img [src]="(baseImgUrl + newHouse.Address + '/' + newHouse.ImageUrl)" alt="{{ newHouse.ImageUrl }}" style="max-width: 100%;">
+            </ng-container>
+            <ng-container *ngIf="numberOfFiles > 1">
+                <!-- Sette inn carousel her -->
+                <img src="/123" alt="mange filer" />
+            </ng-container>
         </div>
         <div id="info-part" class="col-11 col-lg-6 col-md-11">
             <div class="inner-card">

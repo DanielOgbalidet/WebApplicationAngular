@@ -22,10 +22,13 @@ export class DetailsComponent implements OnInit {
   numberOfNights = 1;
   totalPrice = 0;
   invalidDates: boolean = false;
+  baseImgUrl: string;
+  numberOfFiles: number = 0;
 
   constructor(private _router: Router,
     private _houseService: HouseService,
     private _route: ActivatedRoute) {
+    this.baseImgUrl = "/assets/images/";
   }
 
   ngOnInit(): void {
@@ -47,12 +50,25 @@ export class DetailsComponent implements OnInit {
           this.newHouse.User = house.user;
           this.totalPrice = this.newHouse.Price;
           // this.updateDays();
+          const address = this.newHouse.Address;
+          this.getNumberOfFiles(address);
           console.log("New House: ", this.newHouse);
         },
         (error: any) => {
           console.error('Error loading house for edit: ', error);
         }
       );
+  }
+
+  getNumberOfFiles(address: string) {
+    console.log("Address to el manzion: ", address);
+    this._houseService.getNumberOfFiles(address).subscribe(count => {
+      this.numberOfFiles = count;
+      console.log("Number of images: ", count);
+    },
+      error => {
+        console.error("Error fetching number of files:", error);
+      });
   }
 
   isObjectEmpty(obj: any): boolean {

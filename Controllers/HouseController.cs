@@ -300,4 +300,32 @@ public class HouseController : Controller
             _logger.LogInformation("No further images chosen");
         }
     }
+
+    [HttpGet("numberOfFiles")]
+    public IActionResult GetNumberOfFiles([FromQuery] string address)
+    {
+        int imgCount;
+        string curdir = System.IO.Directory.GetCurrentDirectory();
+        string subpath = curdir + "/ClientApp/src/assets/images/";
+        string folderpath = System.IO.Path.Combine(subpath, address);
+        try
+        {
+            if (!Directory.Exists(folderpath))
+            {
+                imgCount = 0;
+                return Ok(imgCount);
+            }
+
+            string[] images = Directory.GetFiles(folderpath);
+            imgCount = images.Length;
+            _logger.LogWarning("Sjekker antall filer for: ", address);
+            _logger.LogWarning("Antall filer: ", imgCount);
+            return Ok(imgCount);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Feil i sjekk av antall filer: {e.Message}");
+            return StatusCode(500, "Something went wrong :0");
+        }
+    }
 }

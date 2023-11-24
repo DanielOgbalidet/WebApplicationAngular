@@ -61,4 +61,9 @@ export class HouseService {
     return this._http.delete(url);
   }
 
+  getNumberOfFiles(address: string): Observable<number> {
+    const apiUrl = `api/house/numberOfFiles?address=${address}`;
+    return this._http.get<number>(apiUrl);
+  }
+
 }
