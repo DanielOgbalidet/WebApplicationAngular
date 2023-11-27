@@ -24,11 +24,17 @@ public class OrderController : Controller
 
     [HttpPost("createOrder")]
     //Method that creates a new order
-    public async Task<IActionResult> CreateOrder(String trip_start, String trip_end, int inHouseId, int inTotalPrice, String email)
+    public async Task<IActionResult> CreateOrder([FromBody] Order inOrder)
     {
+        if (inOrder == null)
+        {
+            return BadRequest("Invalid house data");
+        }
+
         try
         {
-            int inUserId = ShowUserId(email);
+            int inUserId = ShowUserId(inOrder.User.Email);
+
             //Find the current date for the order date
             DateTime currentDateTime = DateTime.Now;
             string curdate = currentDateTime.ToString("yyyy-MM-dd");
@@ -38,10 +44,10 @@ public class OrderController : Controller
             {
                 OrderDate = curdate,
                 UserId = inUserId,
-                HouseId = inHouseId,
-                StartDate = trip_start,
-                EndDate = trip_end,
-                TotalPrice = inTotalPrice
+                HouseId = inOrder.HouseId,
+                StartDate = inOrder.StartDate,
+                EndDate = inOrder.EndDate,
+                TotalPrice = inOrder.TotalPrice
             };
 
             //Add the new order to the database

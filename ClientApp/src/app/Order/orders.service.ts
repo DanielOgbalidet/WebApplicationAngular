@@ -15,8 +15,8 @@ export class OrderService {
 
   /*
   createOrder(newOrder: IOrder): Observable<any> {
-    const createUrl = 'api/order/createOrder';
-    return this._http.post<any>(createUrl, newOrder.StartDate, newOrder.EndDate, newOrder.HouseId, newOrder.TotalPrice, newOrder.User.Email);
+    const createUrl = `${this.baseUrl}/createOrder`;
+    return this._http.post<IOrder>(createUrl, newOrder);
   }
   */
 
