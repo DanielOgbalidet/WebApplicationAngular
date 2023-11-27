@@ -3,6 +3,7 @@ import { IHouse } from '../house';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../houses.service';
 import { IUser } from '../../users/user';
+import { IOrder } from '../../Order/order';
 
 @Component({
   selector: 'app-details', // Specify the selector for the component
@@ -13,6 +14,8 @@ import { IUser } from '../../users/user';
 export class DetailsComponent implements OnInit {
   @ViewChild('startDateInput') startDateInput!: ElementRef;
   @ViewChild('endDateInput') endDateInput!: ElementRef;
+
+  // Variables to control the specific house to look at 
   startDateMin: string = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
   endDateMin: Date = new Date(this.startDateMin);
   endDateMinString: string = '';
@@ -22,13 +25,13 @@ export class DetailsComponent implements OnInit {
   numberOfNights = 1;
   totalPrice = 0;
   invalidDates: boolean = false;
-  baseImgUrl: string;
-  numberOfFiles: number = 0;
+
+  // Variable to create order
+  newOrder: IOrder = {} as IOrder;
 
   constructor(private _router: Router,
     private _houseService: HouseService,
     private _route: ActivatedRoute) {
-    this.baseImgUrl = "/assets/images/";
   }
 
   ngOnInit(): void {
@@ -38,6 +41,19 @@ export class DetailsComponent implements OnInit {
       this.endDateMin.setDate(this.endDateMin.getDate() + 1); // Add one day
       this.endDateMinString = new Date(this.endDateMin).toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
     });
+  }
+
+  createOrder(): void {
+    this.newOrder.OrderDate = this.startDateMin; // Todays date
+    // Temp user date
+    this.newOrder.UserId = 1;
+    this.newOrder.HouseId = this.houseId;
+    const startDateValue = (this.startDateInput.nativeElement as HTMLInputElement).value; // Start date input
+    this.newOrder.StartDate = startDateValue;
+    const endDateValue = (this.endDateInput.nativeElement as HTMLInputElement).value;  // End date input
+    this.newOrder.EndDate = endDateValue;
+    this.totalPrice = this.totalPrice;
+    console.log('New order:', this.newOrder);
   }
 
   getHouse(houseId: number) {
@@ -50,25 +66,12 @@ export class DetailsComponent implements OnInit {
           this.newHouse.User = house.user;
           this.totalPrice = this.newHouse.Price;
           // this.updateDays();
-          const address = this.newHouse.Address;
-          this.getNumberOfFiles(address);
           console.log("New House: ", this.newHouse);
         },
         (error: any) => {
           console.error('Error loading house for edit: ', error);
         }
       );
-  }
-
-  getNumberOfFiles(address: string) {
-    console.log("Address to el manzion: ", address);
-    this._houseService.getNumberOfFiles(address).subscribe(count => {
-      this.numberOfFiles = count;
-      console.log("Number of images: ", count);
-    },
-      error => {
-        console.error("Error fetching number of files:", error);
-      });
   }
 
   isObjectEmpty(obj: any): boolean {
@@ -79,6 +82,8 @@ export class DetailsComponent implements OnInit {
   updateDays(): void {
     const startDateValue = (this.startDateInput.nativeElement as HTMLInputElement).value;
     const endDateValue = (this.endDateInput.nativeElement as HTMLInputElement).value;
+
+    // Turn it into date objects so we can calculate the difference in days
     const newstartDate = new Date(startDateValue);
     const newendDate = new Date(endDateValue);
 
@@ -106,4 +111,6 @@ export class DetailsComponent implements OnInit {
     console.log("End date", endDateValue);
     console.log('Difference in days:', differenceInDays);
   }
+
+
 }
