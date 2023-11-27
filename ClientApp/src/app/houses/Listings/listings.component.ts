@@ -21,13 +21,7 @@ export class ListingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Here");
-    this._route.params.subscribe(params => {
-      this.userId = + params['id'];
-      console.log("UserId", this.userId);
-      this.getMyListings(this.userId);
-      console.log("Get listings done");
-    });
+    this.getMyListings();
   }
 
   deleteHouse(house: IHouse): void {
@@ -46,7 +40,7 @@ export class ListingsComponent implements OnInit {
     }
   }
 
-  getMyListings(userId: number) {
+  getMyListings() {
     console.log("Get listings started");
     const email = sessionStorage.getItem("email")!;
     this._houseService.getListings(email)

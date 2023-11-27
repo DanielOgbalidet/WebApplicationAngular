@@ -40,7 +40,7 @@ import { RegisterComponent } from './users/register/register.component';
       { path: 'houses', component: HousesComponent },
       { path: 'houseform', component: HouseformComponent },
       { path: 'details/:id', component: DetailsComponent },
-      { path: 'listings/:id', component: ListingsComponent },
+      { path: 'listings', component: ListingsComponent },
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'login', component: LoginComponent },
       { path: 'Table', component: OrderTableComponent },
