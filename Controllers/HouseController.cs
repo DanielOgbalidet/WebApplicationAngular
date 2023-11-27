@@ -122,10 +122,11 @@ public class HouseController : Controller
     }
 
     //Find a user with the corresponding email
-    public int ShowUserId(string id)
+    [HttpGet("showId/{email}")]
+    public int ShowUserId(string email)
     {
         //Retreive user from database
-        var user = _db.User.FirstOrDefault(u => u.Email == id);
+        var user = _db.User.FirstOrDefault(u => u.Email == email);
 
         //Check if user exists
         if (user != null)
@@ -140,13 +141,13 @@ public class HouseController : Controller
             }
             else
             {
-                _logger.LogError($"Unable to convert user.Id to int for email: {id}");
+                _logger.LogError($"Unable to convert user.Id to int for email: {email}");
                 return -1;
             }
         }
         else
         {
-            _logger.LogWarning($"User not found for email: {id}");
+            _logger.LogWarning($"User not found for email: {email}");
             return -2;
         }
     }

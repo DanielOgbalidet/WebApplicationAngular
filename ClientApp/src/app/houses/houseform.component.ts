@@ -27,7 +27,7 @@ export class HouseformComponent {
       bedrooms: [null],
       guests: [null],
       description: [''],
-      userId: [1],
+      userId: [0],
       gridImg: [null],
       moreImg: [[null]]
     });
@@ -52,6 +52,7 @@ export class HouseformComponent {
   onSubmit() {
     console.log("HouseCreate form submitted");
     console.log(this.houseForm);
+
     const newHouse = this.houseForm.value;
 
     const gridImgControl = this.houseForm.get('gridImg');
@@ -124,6 +125,16 @@ export class HouseformComponent {
         this.loadHouseForEdit(this.houseId);
       }
     });
+
+    this._houseService.showId(sessionStorage.getItem("email")!).subscribe(
+      (userIdValue: number) => {
+        // Update the userId in the form
+        this.houseForm.get('userId')!.setValue(userIdValue);
+      },
+      (error) => {
+        console.error("Error fetching userId:", error);
+      }
+    );
   }
 
   loadHouseForEdit(houseId: number) {

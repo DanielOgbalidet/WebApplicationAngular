@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IHouse } from './house';
+//import { get } from 'http';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,11 @@ export class HouseService {
   getNumberOfFiles(address: string): Observable<number> {
     const apiUrl = `api/house/numberOfFiles?address=${address}`;
     return this._http.get<number>(apiUrl);
+  }
+
+  showId(email: string): Observable<number> {
+    const url = `${this.baseUrl}/showId/${email}`;
+    return this._http.get<number>(url);
   }
 
 }
