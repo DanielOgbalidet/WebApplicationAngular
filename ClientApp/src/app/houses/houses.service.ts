@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IHouse } from './house';
+import { IOrder } from '../Order/order';
 //import { get } from 'http';
 
 @Injectable({
@@ -15,6 +16,12 @@ export class HouseService {
 
   getHouses(): Observable<IHouse[]> {
     return this._http.get<IHouse[]>(this.baseUrl);
+  }
+
+  // Goes to the order controller
+  createOrder(newOrder: IOrder): Observable<any> {
+    const createUrl = `api/order/createOrder`;
+    return this._http.post<IOrder>(createUrl, newOrder);
   }
 
   createHouse(newHouse: IHouse): Observable<any> {

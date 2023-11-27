@@ -33,7 +33,7 @@ public class OrderController : Controller
 
         try
         {
-            int inUserId = ShowUserId(inOrder.User.Email);
+            //int inUserId = ShowUserId(inOrder.User.Email);
 
             //Find the current date for the order date
             DateTime currentDateTime = DateTime.Now;
@@ -42,8 +42,8 @@ public class OrderController : Controller
             //Make the new order
             var order = new Order
             {
-                OrderDate = curdate,
-                UserId = inUserId,
+                OrderDate = inOrder.OrderDate,
+                UserId = inOrder.UserId,
                 HouseId = inOrder.HouseId,
                 StartDate = inOrder.StartDate,
                 EndDate = inOrder.EndDate,

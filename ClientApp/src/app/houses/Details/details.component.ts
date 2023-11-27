@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit {
 
   // Variable to create order
   newOrder: IOrder = {} as IOrder;
+  newOrderUser: IUser = {} as IUser;
 
   constructor(private _router: Router,
     private _houseService: HouseService,
@@ -44,16 +45,39 @@ export class DetailsComponent implements OnInit {
   }
 
   createOrder(): void {
-    this.newOrder.OrderDate = this.startDateMin; // Todays date
-    // Temp user date
+    // Creating order object to save in DB
+    this.newOrder.OrderDate = new Date().toISOString().split('T')[0]; // Todays date in ISO format
+    // Temp userId
     this.newOrder.UserId = 1;
     this.newOrder.HouseId = this.houseId;
+
+    // Get values from input fields (startDate and endDate)
     const startDateValue = (this.startDateInput.nativeElement as HTMLInputElement).value; // Start date input
-    this.newOrder.StartDate = startDateValue;
     const endDateValue = (this.endDateInput.nativeElement as HTMLInputElement).value;  // End date input
+
+    this.newOrder.StartDate = startDateValue;
     this.newOrder.EndDate = endDateValue;
-    this.totalPrice = this.totalPrice;
-    console.log('New order:', this.newOrder);
+    this.newOrder.TotalPrice = this.totalPrice;
+
+    // Orders user
+    this.newOrderUser.FirstName = 'Hans';
+    this.newOrderUser.LastName = 'Hansen';
+    this.newOrderUser.Address = 'Testveien';
+    this.newOrderUser.Number = '989898';
+    this.newOrderUser.Email = 'test@test.com';
+
+    this.newOrder.User = this.newOrderUser;
+
+    // Creating order 
+    this._houseService.createOrder(this.newOrder)
+      .subscribe(response => {
+        if (response.success) {
+          console.log(response.message);
+        }
+        else {
+          console.log("Order creation failed");
+        }
+      });
   }
 
   getHouse(houseId: number) {
@@ -103,6 +127,7 @@ export class DetailsComponent implements OnInit {
       // Change the values on the screen if values are valid
       this.invalidDates = false;
       this.totalPrice = differenceInDays * this.newHouse.Price;
+      console.log("Updated total price", this.totalPrice);
       this.numberOfNights = differenceInDays;
     }
 

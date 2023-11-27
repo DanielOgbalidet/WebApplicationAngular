@@ -11,10 +11,12 @@ namespace WebApplicationAngular.Models
         [JsonPropertyName("UserId")]
         public int UserId { get; set; }
         [JsonPropertyName("User")]
+        [JsonIgnore]
         public virtual User? User { get; set; }
         [JsonPropertyName("HouseId")]
         public int HouseId { get; set; }
         [JsonPropertyName("House")]
+        [JsonIgnore]
         public virtual House? House { get; set; }
         [JsonPropertyName("StartDate")]
         public string StartDate { get; set; } = string.Empty;
