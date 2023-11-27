@@ -153,9 +153,11 @@ public class HouseController : Controller
     }
 
     //Find all houses that was created by a specific user
-    [HttpGet("listings/{id}")]
-    public List<House> GetHousesByUserId(int id)
+    [HttpGet("listings/{email}")]
+    public List<House> GetHousesByUserId(string email)
     {
+        int id = ShowUserId(email);
+
         var houses = _db.Houses.Where(h => h.UserId == id).ToList();
 
         if (houses.Count > 0)

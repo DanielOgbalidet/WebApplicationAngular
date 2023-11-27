@@ -48,7 +48,8 @@ export class ListingsComponent implements OnInit {
 
   getMyListings(userId: number) {
     console.log("Get listings started");
-    this._houseService.getListings(this.userId)
+    const email = sessionStorage.getItem("email")!;
+    this._houseService.getListings(email)
       .subscribe(
         (listings: IHouse[]) => {
           console.log('retreived listings: ', JSON.stringify(listings));

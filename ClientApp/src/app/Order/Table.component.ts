@@ -34,6 +34,7 @@ export class OrderTableComponent implements OnInit {
     this.newOrder.User = this.newUser;
     this.newOrder.User.Email = this.newUser.Email;
     console.log(this.newOrder.User.Email);
+    /*
     this._orderService.createOrder(this.newOrder)
       .subscribe(response => {
         if (response.success) {
@@ -43,6 +44,7 @@ export class OrderTableComponent implements OnInit {
           console.log("Order creation failed");
         }
       });
+      */
   }
 }
 

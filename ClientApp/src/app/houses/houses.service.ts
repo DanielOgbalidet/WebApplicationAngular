@@ -46,8 +46,8 @@ export class HouseService {
     return this._http.get(url);
   }
 
-  getListings(userId: number): Observable<IHouse[]> {
-    const url = `${this.baseUrl}/listings/${userId}`;
+  getListings(email: string): Observable<IHouse[]> {
+    const url = `${this.baseUrl}/listings/${email}`;
     return this._http.get<IHouse[]>(url);
   }
 
