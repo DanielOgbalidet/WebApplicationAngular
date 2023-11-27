@@ -48,6 +48,11 @@ export class HouseService {
     return this._http.post<any>(uploadImgUrl, formData);
   }
 
+  getImages(address: string): Observable<number> {
+    const apiUrl = `api/house/getImages?address=${address}`;
+    return this._http.get<any>(apiUrl);
+  }
+
   getHouseById(houseId: number): Observable<any> {
     const url = `${this.baseUrl}/${houseId}`;
     return this._http.get(url);
@@ -67,11 +72,6 @@ export class HouseService {
   deleteHouse(houseId: number): Observable<any> {
     const url = `${this.baseUrl}/delete/${houseId}`;
     return this._http.delete(url);
-  }
-
-  getNumberOfFiles(address: string): Observable<number> {
-    const apiUrl = `api/house/numberOfFiles?address=${address}`;
-    return this._http.get<number>(apiUrl);
   }
 
   showId(email: string): Observable<number> {

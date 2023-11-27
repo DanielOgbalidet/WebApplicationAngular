@@ -304,10 +304,11 @@ public class HouseController : Controller
         }
     }
 
-    [HttpGet("numberOfFiles")]
-    public IActionResult GetNumberOfFiles([FromQuery] string address)
+    [HttpGet("getImages")]
+    public IActionResult GetImages([FromQuery] string address)
     {
         int imgCount;
+        string[] images;
         string curdir = System.IO.Directory.GetCurrentDirectory();
         string subpath = curdir + "/ClientApp/src/assets/images/";
         string folderpath = System.IO.Path.Combine(subpath, address);
@@ -315,15 +316,29 @@ public class HouseController : Controller
         {
             if (!Directory.Exists(folderpath))
             {
+                _logger.LogError("Finner ikke mappen!!");
                 imgCount = 0;
-                return Ok(imgCount);
+                images = new string[0];
+                return Ok(new { ImgCount = imgCount, Images = images });
             }
 
-            string[] images = Directory.GetFiles(folderpath);
+
+            images = System.IO.Directory.GetFiles(folderpath);
             imgCount = images.Length;
+
+            for (int i = 0; i < images.Length; i++)
+            {
+                // Split stien ved directory-separatoren ("/" eller "\") og behold de tre siste delene
+                string[] pathParts = images[i].Split(Path.DirectorySeparatorChar);
+                if (pathParts.Length >= 4)
+                {
+                    images[i] = string.Join(Path.DirectorySeparatorChar.ToString(), pathParts[^4..]);
+                }
+            }
+
             _logger.LogWarning("Sjekker antall filer for: ", address);
             _logger.LogWarning("Antall filer: ", imgCount);
-            return Ok(imgCount);
+            return Ok(new { ImgCount = imgCount, Images = images });
         }
         catch (Exception e)
         {

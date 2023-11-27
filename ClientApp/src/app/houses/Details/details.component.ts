@@ -23,6 +23,9 @@ export class DetailsComponent implements OnInit {
   newUser: IUser = {} as IUser;
   houseId: number = -1;
   numberOfNights = 1;
+  baseImgUrl: string;
+  numberOfFiles: number = 0;
+  images: string[] = [];
   totalPrice = 0;
   invalidDates: boolean = false;
 
@@ -33,6 +36,7 @@ export class DetailsComponent implements OnInit {
   constructor(private _router: Router,
     private _houseService: HouseService,
     private _route: ActivatedRoute) {
+    this.baseImgUrl = "/assets/images/";
   }
 
   ngOnInit(): void {
@@ -41,6 +45,7 @@ export class DetailsComponent implements OnInit {
       this.getHouse(this.houseId);
       this.endDateMin.setDate(this.endDateMin.getDate() + 1); // Add one day
       this.endDateMinString = new Date(this.endDateMin).toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
+      this.startCarousel();
     });
   }
 
@@ -90,12 +95,45 @@ export class DetailsComponent implements OnInit {
           this.newHouse.User = house.user;
           this.totalPrice = this.newHouse.Price;
           // this.updateDays();
+          const address = this.newHouse.Address;
+          this.getImages(address);
           console.log("New House: ", this.newHouse);
         },
         (error: any) => {
           console.error('Error loading house for edit: ', error);
         }
       );
+  }
+
+  getImages(address: string) {
+    console.log("Address to el manzion: ", address);
+    this._houseService.getImages(address).subscribe((result: any) => {
+      console.log("Result: ", result);
+      this.numberOfFiles = result && result.imgCount ? result.imgCount : 0;
+      this.images = result && result.images ? result.images : [];
+      console.log("Number of images: ", this.numberOfFiles);
+      console.log("Images: ", this.images);
+    },
+      error => {
+        console.error("Error fetching number of files:", error);
+      });
+  }
+
+  currentSlideIndex: number = 0;
+  public intervalId: any;
+
+  startCarousel() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 3000); // Set the interval (in milliseconds) according to your preference
+  }
+
+  prevSlide() {
+    this.currentSlideIndex = (this.currentSlideIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  nextSlide() {
+    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.images.length;
   }
 
   isObjectEmpty(obj: any): boolean {
