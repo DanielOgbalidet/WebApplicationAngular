@@ -20,6 +20,7 @@ export class OrderTableComponent implements OnInit {
     private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    /*
     this.newOrder.StartDate = '23-02-23';
     this.newOrder.StartDate = '24-02-23';
     this.newOrder.HouseId = 1;
@@ -43,6 +44,7 @@ export class OrderTableComponent implements OnInit {
           console.log("Order creation failed");
         }
       });
+  */
   }
 }
 

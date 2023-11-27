@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IHouse } from './house';
 import { IOrder } from '../Order/order';
+//import { get } from 'http';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class HouseService {
 
   private baseUrl = 'api/house';
@@ -73,4 +73,10 @@ export class HouseService {
     const apiUrl = `api/house/numberOfFiles?address=${address}`;
     return this._http.get<number>(apiUrl);
   }
+
+  showId(email: string): Observable<number> {
+    const url = `${this.baseUrl}/showId/${email}`;
+    return this._http.get<number>(url);
+  }
+
 }
