@@ -1,4 +1,3 @@
-Details html
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </head>
@@ -66,8 +65,7 @@ Details html
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <th><p><i class="bi bi-cash-coin"></i>   TOTAL PRICE: </p></th>
-                                <td><p id="totalPrice" #totalPrice>{{ totalPrice }}</p></td>
-                                <input type="hidden" name="inTotalPrice" id="inTotalPrice" />
+                                <td><p id="totalPrice">{{ totalPrice }}</p></td>
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <td><button id="makeOrder" class="btn btn-primary" (click)="createOrder()">Order</button></td>
