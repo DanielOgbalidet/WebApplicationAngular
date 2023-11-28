@@ -183,5 +183,15 @@ export class DetailsComponent implements OnInit {
     console.log('Difference in days:', differenceInDays);
   }
 
+  showModal: boolean = false;
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
 
 }

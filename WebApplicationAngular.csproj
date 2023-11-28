@@ -36,6 +36,7 @@
     <None Remove="ClientApp\src\app\houses\Details\" />
     <None Remove="ClientApp\src\assets\images\dir2\" />
     <None Remove="ClientApp\src\app\houses\Listings\" />
+    <None Remove="ClientApp\src\app\houses\Modal\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,7 @@
     <Folder Include="ClientApp\src\app\houses\Details\" />
     <Folder Include="ClientApp\src\assets\images\dir2\" />
     <Folder Include="ClientApp\src\app\houses\Listings\" />
+    <Folder Include="ClientApp\src\app\houses\Modal\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,6 +16,7 @@ import { ListingsComponent } from './houses/Listings/listings.component';
 import { OrderTableComponent } from './Order/Table.component';
 import { RegisterComponent } from './users/register/register.component';
 import { OrderformComponent } from './Order/orderform/orderform.component';
+import { ModalComponent } from './houses/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,15 @@ import { OrderformComponent } from './Order/orderform/orderform.component';
     NavMenuComponent,
     HomeComponent,
     HousesComponent,
-    DetailsComponent, 
+    DetailsComponent,
     ConvertCurrency,
     HouseformComponent,
-    ListingsComponent, 
+    ListingsComponent,
     LoginComponent,
     OrderTableComponent,
     RegisterComponent,
-    OrderformComponent
+    OrderformComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,7 +50,7 @@ import { OrderformComponent } from './Order/orderform/orderform.component';
       { path: 'Table', component: OrderTableComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'orderform/:orderId', component: OrderformComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full'},
+      { path: '**', redirectTo: '', pathMatch: 'full' },
     ])
   ],
   providers: [],

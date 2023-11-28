@@ -11,6 +11,18 @@ h1, h3 {
   max-width: 50%;
 }
 
+
+
+#indicator {
+  background-color: black;
+  opacity: 0.6;
+  border-radius: 50%;
+}
+
+#modalSrc:hover {
+  opacity: 0.9;
+}
+
 #info-part {
   height: 100%;
   min-height: 100%;
@@ -51,12 +63,6 @@ th {
 #makeOrder {
   width: 100%;
   height: 100%;
-  background-color: #A9B388;
-  border: none; 
-}
-
-#makeOrder:hover {
-    opacity: 0.8; 
 }
 
 #details_container {
@@ -74,6 +80,7 @@ th {
   margin-top: 5vh;
 }
 
+
 .inner {
   margin-top: 2vh;
 }
@@ -82,28 +89,26 @@ inner-card {
   margin-top: 0px;
 }
 
+
 img {
-  max-width: 100%;
+  max-height: 100%;
 }
+
 
 .carousel-inner {
   display: flex;
   align-items: center;
   overflow: hidden;
-  height: 300px; /* Juster høyden etter dine preferanser */
+  height: 100%;
 }
 
 .carousel-item {
   flex: 0 0 auto;
-  width: 100%; /* Bredden skal være 100% av containeren */
+  max-width: 100%;
   height: 100%; /* Høyden skal være 100% av containeren */
+  margin-left: auto;
+  margin-right: auto;
 }
-
-  .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 
 /* Media query for when screen is smaller than 992px*/
 @media only screen and (max-width: 992px) {
