@@ -3,14 +3,14 @@ h1 {
 }
 
 .container-fluid {
-  margin-left: 2vw;
-  padding-right: 5vw;
+  margin-left: 0vw;
   padding-top: 3vh;
-  padding-left: 0px;
+  padding-left: 2vw;
   padding-right: 0px;
   padding-bottom: 5vh;
-  margin-right: 2vw;
-  width: 40%;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFF0;
 }
 
 #unameLabel {
@@ -19,6 +19,10 @@ h1 {
 
 #pswLabel {
   margin-bottom: 1vh;
+}
+
+.row {
+  width: 100%;
 }
 
 /* Full-width inputs */
@@ -34,7 +38,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #2f78c6;
+  background-color: #A9B388;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -58,7 +62,7 @@ button {
 /* Styles for the loading spinner */
 .loader {
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #3498db; /* Change color if needed */
+  border-top: 4px solid #5F6F52; /* Change color if needed */
   border-radius: 50%;
   width: 20px;
   height: 20px;
