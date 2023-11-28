@@ -10,10 +10,10 @@
             <div id="left-side" class="col-md-6 no-padding">
                 <h1 id="headertext">HOME SWEET RENTED HOME!</h1>
                 <a id="listing-button" asp-area="" asp-controller="House" asp-action="Grid">
-                    <button type="button" class="button"><span>Houses</span></button>
+                    <button type="button" class="button" [routerLinkActive]="['link-active']"  [routerLink]="['/houses']"><span>Houses</span></button>
                 </a>
                 <a id="order-button" asp-controller="Order" asp-action="Table" asp-route-email="@UserManager.GetUserName(User)">
-                    <button type="button" class="button"><span>Orders</span></button>
+                    <button type="button" class="button" [routerLinkActive]="['link-active']"  [routerLink]="['/Table']"><span>Orders</span></button>
                 </a>
             </div>
             <div id="right-side" class="col-md-6 no-padding">
