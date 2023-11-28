@@ -1,27 +1,42 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="firstName">First Name <i class="bi bi-cash-coin"></i></label>
-    <input id="firstName" class="form-control" formControlName="firstName" />
-  </div>
-  <div class="form-group">
-    <label for="lastName">Last Name <i class="bi bi-cash-coin"></i></label>
-    <input id="lastName" class="form-control" formControlName="lastName" />
-  </div>
-  <div class="form-group">
-    <label for="address">Address <i class="bi bi-cash-coin"></i></label>
-    <input id="address" class="form-control" formControlName="address" />
-  </div>
-  <div class="form-group">
-    <label for="number">Number <i class="bi bi-cash-coin"></i></label>
-    <input id="number" class="form-control" formControlName="number" />
-  </div>
-  <div class="form-group">
-    <label for="email">Email <i class="bi bi-cash-coin"></i></label>
-    <input id="email" class="form-control" formControlName="email" />
-  </div>
-  <div class="form-group">
-    <label for="password">Password <i class="bi bi-cash-coin"></i></label>
-    <input type="password" id="password" class="form-control" formControlName="password" />
-  </div>
-  <button type="submit">Register</button>
-</form>
+<div class="container">
+    <h1>
+        Register
+    </h1>
+    <form class="row" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="firstName"><b>First name</b><i class="bi bi-cash-coin"></i></label>
+                <input id="firstName" class="form-control" formControlName="firstName" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="lastName"><b>Last name</b><i class="bi bi-cash-coin"></i></label>
+                <input id="lastName" class="form-control" formControlName="lastName" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="address"><b>Address</b><i class="bi bi-cash-coin"></i></label>
+                <input id="address" class="form-control" formControlName="address" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="number"><b>Number</b><i class="bi bi-cash-coin"></i></label>
+                <input id="number" class="form-control" formControlName="number" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="email"><b>Email</b><i class="bi bi-cash-coin"></i></label>
+                <input id="email" class="form-control" formControlName="email" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password"><b>Password</b><i class="bi bi-cash-coin"></i></label>
+            <input type="password" id="password" class="form-control" formControlName="password" />
+        </div>
+    </form>
+    <button id="register" type="submit">Register</button>
+</div>

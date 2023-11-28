@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title></title>
+    <meta charset="utf-8" />
+    <title></title>
 </head>
 <body>
+    <form (ngSubmit)="onSubmit()" method="post">
+        <div class="container-fluid">
+            <h1>
+                Log in
+            </h1>
+            <div *ngIf="loginFail" class="alert alert-danger box-msg" role="alert">
+                <strong>Either your email or password was incorrect. Please try again. </strong>
+            </div>
+            <label id="unameLabel" for="uname"><b>Email</b></label>
+            <input type="text" name="uname" required [(ngModel)]="email">
 
-  <form (ngSubmit)="onSubmit()" method="post">
-    <div class="container">
-      <div *ngIf="loginFail" class="alert alert-danger box-msg" role="alert">
-        <strong>Either your email or password was incorrect. Please try again. </strong>
-      </div>
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required [(ngModel)]="email">
+            <label id="pswLabel" for="psw"><b>Password</b></label>
+            <input type="password" name="psw" required [(ngModel)]="password">
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required [(ngModel)]="password">
-
-      <button type="submit">Login</button>
-      <button [routerLink]="['/register']">Register</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
-
+            <button id="login" type="submit" class="login-button" (click)="loader()">
+                <div>Login</div>
+                <div *ngIf="loaderCheck" class="loader"></div>
+            </button>
+            <button [routerLink]="['/register']">Register</button>
+        </div>
+    </form>
 </body>
 </html>
