@@ -40,6 +40,7 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this._route.params.subscribe(params => {
       this.houseId = + params['id'];
       this.getHouse(this.houseId);
