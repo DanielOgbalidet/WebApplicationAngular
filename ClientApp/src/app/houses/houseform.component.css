@@ -16,6 +16,12 @@ h1 {
 #save {
   margin-top: 1.5vh;
   margin-right: 0.5vw;
+  background-color: #A9B388;
+  border: none; 
+}
+
+#save:hover {
+    opacity: 0.8; 
 }
 
 #cancel {

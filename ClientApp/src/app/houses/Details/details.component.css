@@ -51,6 +51,12 @@ th {
 #makeOrder {
   width: 100%;
   height: 100%;
+  background-color: #A9B388;
+  border: none; 
+}
+
+#makeOrder:hover {
+    opacity: 0.8; 
 }
 
 #details_container {
