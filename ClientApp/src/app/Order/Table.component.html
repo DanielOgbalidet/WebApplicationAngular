@@ -14,21 +14,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="min-width: 80vw;">
-                        <!--*ngFor="let order of orders"-->
-                        <td><!--Order.OrderDate -->H</td>
-                        <td><!--Order.StartDate -->H</td>
-                        <td><!--Order.EndDate-->H</td>
+                    <tr *ngFor="let order of myOrders" style="min-width: 80vw">
+                        <td>{{ order.OrderDate }}</td>
+                        <td>{{ order.StartDate }}</td>
+                        <td>{{ order.EndDate }}</td>
                         <td>
-                            <a id="house-link">
-                                <!--[routerLink]="['/house', 'details', order.House.HouseId]"-->
-                                H<!--Order.House.Address-->
+                            <a id="house-link" [routerLink]="['/house', 'details', order.House.HouseId]">
+                                {{ order.House.Address }}
                             </a>
                         </td>
-                        <td>H<!--Order.TotalPrice--></td>
+                        <td>{{ order.TotalPrice }}</td>
                         <td>
-                            <a id="update" class="btn btn-success btn-sm btn">Update</a>
-                            <a id="delete" class="btn btn-danger btn-sm btn">Delete</a>
+                            <a id="update" [routerLink]="['/orderform', order.OrderId]" class="btn btn-success btn-sm btn">Update</a>
+                            <a id="delete" class="btn btn-danger btn-sm btn" (click)="deleteOrder(order)" >Delete</a>
                         </td>
                     </tr>
                 </tbody>

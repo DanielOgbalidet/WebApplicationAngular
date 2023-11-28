@@ -13,20 +13,13 @@ export class OrderService {
 
   constructor(private _http: HttpClient) { }
 
-  /*
-  createOrder(newOrder: IOrder): Observable<any> {
-    const createUrl = `${this.baseUrl}/createOrder`;
-    return this._http.post<IOrder>(createUrl, newOrder);
-  }
-  */
-
   getOrderById(orderId: number): Observable<any> {
-    const url = `${this.baseUrl}/${orderId}`;
+    const url = `${this.baseUrl}/getOrderById/${orderId}`;
     return this._http.get(url);
   }
 
-  getOrders(userId: number): Observable<IOrder[]> {
-    const url = `${this.baseUrl}/orders/${userId}`;
+  getOrders(email: string): Observable<IOrder[]> {
+    const url = `${this.baseUrl}/orders/${email}`;
     return this._http.get<IOrder[]>(url);
   }
 

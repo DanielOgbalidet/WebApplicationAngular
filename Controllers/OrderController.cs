@@ -106,10 +106,10 @@ public class OrderController : Controller
     }
 
     //Find user from database
-    public int ShowUserId(string id)
+    public int ShowUserId(string email)
     {
         //Retreive user with email
-        var user = _houseDbContext.User.FirstOrDefault(u => u.Email == id);
+        var user = _houseDbContext.User.FirstOrDefault(u => u.Email == email);
 
         //Check if user exists
         if (user != null)
@@ -124,20 +124,23 @@ public class OrderController : Controller
             }
             else
             {
-                _logger.LogError($"Unable to convert user.Id to int for email: {id}");
+                _logger.LogError($"Unable to convert user.Id to int for email: {email}");
                 return -1;
             }
         }
         else
         {
-            _logger.LogWarning($"User not found for email: {id}");
+            _logger.LogWarning($"User not found for email: {email}");
             return -2;
         }
     }
 
     //Find all orders for one user
-    public List<Order> GetOrdersByUserId(int id)
+    [HttpGet("orders/{email}")]
+    public List<Order> GetOrdersByUserId(string email)
     {
+        int id = ShowUserId(email);
+
         //Retreive orders to list
         var orders = _houseDbContext.Order.Where(o => o.UserId == id).ToList();
 
@@ -151,5 +154,18 @@ public class OrderController : Controller
         }
 
         return orders;
+    }
+
+    [HttpGet("getOrderById/{orderId}")]
+    public async Task<IActionResult> GetOrderById(int orderId)
+    {
+        _logger.LogError($"Funker det? {orderId}");
+        var order = await _orderRepository.GetOrderById(orderId);
+        if(order == null)
+        {
+            _logger.LogError("[OrderController] Order not found");
+            return NotFound("Order not found");
+        }
+        return Ok(order);
     }
 }

@@ -11,6 +11,7 @@ import { OrderService } from './orders.service';
 })
 
 export class OrderTableComponent implements OnInit {
+  myOrders: IOrder[] = [];
   newOrder: IOrder = {} as IOrder;
   newUser: IUser = {} as IUser;
 
@@ -20,58 +21,37 @@ export class OrderTableComponent implements OnInit {
     private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    /*
-    this.newOrder.StartDate = '23-02-23';
-    this.newOrder.StartDate = '24-02-23';
-    this.newOrder.HouseId = 1;
-    this.newOrder.TotalPrice = 500;
+    this.getMyOrders();
+  }
 
-    this.newUser.FirstName = 'Hans';
-    this.newUser.LastName = 'Hansen';
-    this.newUser.Address = 'Testveien';
-    this.newUser.Number = '989898';
-    this.newUser.Email = 'test@test.com';
+  getMyOrders() {
+    const email = sessionStorage.getItem("email")!;
+    this._orderService.getOrders(email)
+      .subscribe(
+        (orders: IOrder[]) => {
+          console.log('Orders retrieved successfully:', orders);
+          this.myOrders = orders;
+        },
+        (error: any) => {
+          console.error('Error loading orders: ', error);
+        }
+      );
+  }
 
-    this.newOrder.User = this.newUser;
-    this.newOrder.User.Email = this.newUser.Email;
-    console.log(this.newOrder.User.Email);
-    /*
-    this._orderService.createOrder(this.newOrder)
-      .subscribe(response => {
-        if (response.success) {
-          console.log(response.message);
-        }
-        else {
-          console.log("Order creation failed");
-        }
-      });
-      */
+  deleteOrder(order: IOrder): void {
+    const confirmDelete = confirm(`Are you sure you want to delete order for "${order.House.Address}"`);
+    if (confirmDelete) {
+      this._orderService.deleteOrder(order.OrderId).subscribe(
+        (response) => {
+          if (response.success) {
+            console.log("Order deleted", response.message);
+            window.location.reload();
+          }
+        },
+        (error) => {
+          console.error('Error deleting order:', error);
+        });
+    }
   }
 }
-
-/* if (this.isEditMode) {
-    this._houseService.updateHouse(this.houseId, newHouse)
-      .subscribe(response => {
-        if (response.success) {
-          console.log(response.message);
-          this._router.navigate(['/houses']);
-        } else {
-          console.log('House update failed');
-        }
-      });*/
-/* String trip_start, String trip_end, int inHouseId, int inTotalPrice, String email */
-
-/*
-export interface IOrder {
-OrderId: number;
-OrderDate: string;
-UserId: number;
-User: IUser;
-HouseId: number;
-House: IHouse;
-StartDate: string;
-EndDate: string;
-TotalPrice: number; 
-} 
-*/
 

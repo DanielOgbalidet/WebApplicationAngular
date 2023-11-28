@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit {
   newHouse: IHouse = {} as IHouse; // Adjust the type according to your house object structure
   newUser: IUser = {} as IUser;
   houseId: number = -1;
+  userId: number = -1;
   numberOfNights = 1;
   totalPrice = 0;
   invalidDates: boolean = false;
@@ -42,14 +43,28 @@ export class DetailsComponent implements OnInit {
       this.endDateMin.setDate(this.endDateMin.getDate() + 1); // Add one day
       this.endDateMinString = new Date(this.endDateMin).toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
     });
+
+    this._houseService.showId(sessionStorage.getItem("email")!).subscribe(
+      (userIdValue: number) => {
+        // Update the userId in the form
+        this.userId = userIdValue;
+      },
+      (error) => {
+        console.error("Error fetching userId:", error);
+      }
+    );
   }
 
   createOrder(): void {
+    if (sessionStorage.getItem("email") === null) {
+      this._router.navigate(['/login'])
+    }
     // Creating order object to save in DB
     this.newOrder.OrderDate = new Date().toISOString().split('T')[0]; // Todays date in ISO format
     // Temp userId
     this.newOrder.UserId = 1;
     this.newOrder.HouseId = this.houseId;
+    this.newOrder.UserId = this.userId;
 
     // Get values from input fields (startDate and endDate)
     const startDateValue = (this.startDateInput.nativeElement as HTMLInputElement).value; // Start date input
@@ -59,20 +74,12 @@ export class DetailsComponent implements OnInit {
     this.newOrder.EndDate = endDateValue;
     this.newOrder.TotalPrice = this.totalPrice;
 
-    // Orders user
-    this.newOrderUser.FirstName = 'Hans';
-    this.newOrderUser.LastName = 'Hansen';
-    this.newOrderUser.Address = 'Testveien';
-    this.newOrderUser.Number = '989898';
-    this.newOrderUser.Email = 'test@test.com';
-
-    this.newOrder.User = this.newOrderUser;
-
     // Creating order 
     this._houseService.createOrder(this.newOrder)
       .subscribe(response => {
         if (response.success) {
           console.log(response.message);
+          this._router.navigate(['/Table'])
         }
         else {
           console.log("Order creation failed");

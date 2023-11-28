@@ -15,6 +15,7 @@ import { LoginComponent } from './users/login/login.component';
 import { ListingsComponent } from './houses/Listings/listings.component';
 import { OrderTableComponent } from './Order/Table.component';
 import { RegisterComponent } from './users/register/register.component';
+import { OrderformComponent } from './Order/orderform/orderform.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RegisterComponent } from './users/register/register.component';
     ListingsComponent, 
     LoginComponent,
     OrderTableComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrderformComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,7 +46,8 @@ import { RegisterComponent } from './users/register/register.component';
       { path: 'houseform/:mode/:id', component: HouseformComponent },
       { path: 'login', component: LoginComponent },
       { path: 'Table', component: OrderTableComponent },
-      { path: 'register', component: RegisterComponent},
+      { path: 'register', component: RegisterComponent },
+      { path: 'orderform/:orderId', component: OrderformComponent },
       { path: '**', redirectTo: '', pathMatch: 'full'},
     ])
   ],
