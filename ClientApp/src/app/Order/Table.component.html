@@ -19,7 +19,7 @@
                         <td>{{ order.StartDate }}</td>
                         <td>{{ order.EndDate }}</td>
                         <td>
-                            <a id="house-link" [routerLink]="['/house', 'details', order.House.HouseId]">
+                            <a id="house-link" [routerLink]="['/details', order.House.HouseId]">
                                 {{ order.House.Address }}
                             </a>
                         </td>
