@@ -14,6 +14,7 @@ export class HousesComponent implements OnInit {
   displayImage: boolean = true;
   houses: IHouse[] = [];
   baseImgUrl: string;
+  selectedSort: number = 0;
 
   constructor(private _router: Router, private _houseService: HouseService) {
     this.baseImgUrl = "/assets/images/";
@@ -45,6 +46,20 @@ export class HousesComponent implements OnInit {
     filterBy = filterBy.toLocaleLowerCase();
     return this.houses.filter((house: IHouse) =>
       house.Address.toLocaleLowerCase().includes(filterBy));
+  }
+
+  sortHouses(event: any) {
+    const type = Number(this.selectedSort);
+    if (type === 1) {
+      console.log("Sort lohi", this.selectedSort);
+      this.filteredHouses.sort((a, b) => a.Price - b.Price);
+    } else if (type === -1) {
+      console.log("Sort hilo", this.selectedSort);
+      this.filteredHouses.sort((a, b) => b.Price - a.Price);
+    } else {
+      console.log("Sort??", this.selectedSort);
+      this.filteredHouses.sort((a, b) => a.HouseId - b.HouseId);
+    }
   }
 
   toggleImage(): void {
