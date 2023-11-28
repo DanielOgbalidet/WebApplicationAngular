@@ -76,6 +76,29 @@ inner-card {
   margin-top: 0px;
 }
 
+img {
+  max-width: 100%;
+}
+
+.carousel-inner {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: 300px; /* Juster høyden etter dine preferanser */
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 100%; /* Bredden skal være 100% av containeren */
+  height: 100%; /* Høyden skal være 100% av containeren */
+}
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
 /* Media query for when screen is smaller than 992px*/
 @media only screen and (max-width: 992px) {
   h1, h3 {
