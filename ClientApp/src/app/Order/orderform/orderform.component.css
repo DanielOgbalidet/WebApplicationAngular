@@ -1,2 +1,61 @@
-﻿body {
+﻿.container {
+  margin-left: 2vw;
+  padding-right: 5vw;
+  padding-top: 3vh;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+  width: 40%;
 }
+
+h1 {
+  margin-bottom: 2.5vh;
+}
+
+
+label {
+  margin-bottom: 1vh;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 2vh;
+  padding: 1.2vh 1.5vw;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+#save {
+  background-color: #2f78c6;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+}
+
+  /* Add a hover effect for buttons */
+  #save:hover {
+    opacity: 0.8;
+  }
+
+#cancel {
+  /* #d12e35*/
+  background-color: grey;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+}
+
+  #cancel:hover {
+    opacity: 0.8;
+  }
