@@ -196,11 +196,6 @@ h1 {
     height: 100%;
   }
 
-  #left-side {
-    margin-right: 1vw;
-    margin-left: 1vw;
-  }
-
   #headertext {
     margin-top: 32vh;
     margin-bottom: 8vh;
@@ -211,7 +206,7 @@ h1 {
   .button {
     border-radius: 4px;
     border-color: black;
-    background-color: rgb(247, 245, 242);
+    background-color: #B99470;
     color: black;
     font-size: 28px;
     padding: 2vh 2vw;
@@ -280,8 +275,8 @@ h1 {
   .button {
     border-radius: 4px;
     border-color: black;
-    background-color: black;
-    color: white;
+    background-color: #B99470;
+    color: black;
     font-size: 25px;
     padding: 2vh 2vw;
     max-width: 40vw;
