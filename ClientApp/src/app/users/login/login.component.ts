@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
   public loginFail = false;
+  loaderCheck: boolean = false;
 
   constructor(private _router: Router,
     private _userService: UserService) { }
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
         this.loginFail = true;
       } else {
         //If user log in, a new session is created
+        this.loader();
         this.loginFail = false;
         sessionStorage.setItem("email", this.email);
         this._router.navigate(['/nav-menu']).then(() => {
@@ -34,7 +36,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  loader(): void {
+    if (this.loginFail = false) {
+      this.loaderCheck = true;
+    }
+  }
+
   ngOnInit(): void {
-    
+
   }
 }
