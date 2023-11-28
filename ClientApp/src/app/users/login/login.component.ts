@@ -20,12 +20,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     //Check if email and password exsist in our table
+    console.log("Log in clicked"); 
     this._userService.checkLogin(this.email, this.password).subscribe((loggedIn) => {
       if (!loggedIn) {
         //Show error message if user can't log in
         this.loginFail = true;
+        this.loaderCheck = false;
       } else {
         //If user log in, a new session is created
+        this.loaderCheck = true;
         this.loader();
         this.loginFail = false;
         sessionStorage.setItem("email", this.email);
@@ -37,12 +40,8 @@ export class LoginComponent implements OnInit {
   }
 
   loader(): void {
-    if (this.loginFail = false) {
-      this.loaderCheck = true;
-    }
+     this.loaderCheck = true;
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }
