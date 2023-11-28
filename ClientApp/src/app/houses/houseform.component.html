@@ -38,6 +38,6 @@
             <input id="userId" class="form-control" formControlName="userId" />
         </div>
         <button id="save" class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} house</button>
-        <button id="cancel" class="btn btn-secondary" (click)="backToHouses()">Cancel</button>
+        <button id="cancel" class="btn btn-secondary" [routerLinkActive]="['link-active']" [routerLink]="['/listings']" >Cancel</button>
     </form>
 </div>
