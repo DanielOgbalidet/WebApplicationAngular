@@ -50,6 +50,7 @@ h1 {
   padding-left: 2vw;
   padding-bottom: 5vh;
   margin-right: 2vw;
+  background-color: #FFFFF0;
 }
 
 .card-img-top {
@@ -93,6 +94,7 @@ h1 {
 .card-body {
   padding: 0;
   padding-top: 10px;
+  background-color: #FFFFF0;
 }
 
 #link {
