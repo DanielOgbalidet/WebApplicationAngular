@@ -11,8 +11,6 @@ h1, h3 {
   max-width: 50%;
 }
 
-
-
 #indicator {
   background-color: black;
   opacity: 0.6;
@@ -74,12 +72,13 @@ th {
 #details_container {
   padding-right: 5vw;
   padding-top: 3%;
-  padding-left: 0vw;
+  padding-left: 2vw;
   padding-right: 5vw;
   padding-bottom: 5vh;
-  margin-right: 2vw;
-  margin-left: 2vw;
+  margin-right: 0px;
+  margin-left: 0px;
   width: 100%;
+  background-color: #FFFFF0;
 }
 
 #bottom-card {
