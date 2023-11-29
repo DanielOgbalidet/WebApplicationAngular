@@ -46,6 +46,7 @@ h1, h3 {
 
 #modalSrc:hover {
   opacity: 0.9;
+  cursor: pointer;
 }
 
 #info-part {
