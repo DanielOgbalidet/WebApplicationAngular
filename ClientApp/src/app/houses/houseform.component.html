@@ -1,6 +1,6 @@
 <div class="fullArea">
     <div class="container-fluid">
-        <h1>{{ isEditMode ? 'Update' : 'Create' }} house</h1>
+        <h1>{{ isEditMode ? 'Update' : 'Create' }} listing</h1>
 
         <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
@@ -59,7 +59,7 @@
                 <label for="userId">UserId <i class="bi bi-cash-coin"></i></label>
                 <input id="userId" class="form-control" formControlName="userId" />
             </div>
-            <button id="save" class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} house</button>
+            <button id="save" class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} listing</button>
             <button id="cancel" class="btn btn-secondary" [routerLinkActive]="['link-active']" [routerLink]="['/listings']">Cancel</button>
         </form>
     </div>

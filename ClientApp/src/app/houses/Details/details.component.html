@@ -115,7 +115,7 @@
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <th><p><i class="bi bi-cash-coin"></i>   TOTAL PRICE: </p></th>
-                                <td><p id="totalPrice">{{ totalPrice }}</p></td>
+                                <td><p id="totalPrice">{{ totalPrice | convertCurrency : 'kr.'}}</p></td>
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <td><button id="makeOrder" class="btn btn-primary" (click)="createOrder()">Order</button></td>

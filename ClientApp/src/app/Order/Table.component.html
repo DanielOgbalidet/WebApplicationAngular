@@ -27,7 +27,7 @@
               {{ order.House.Address }}
             </a>
           </td>
-          <td>{{ order.TotalPrice }}</td>
+          <td>{{ order.TotalPrice | convertCurrency : 'kr.'}}</td>
           <td>
             <a id="update" [routerLink]="['/orderform', order.OrderId]" class="btn btn-success btn-sm btn" style="margin-right: 10px"><i class="bi bi-pencil-fill"></i></a>
             <a id="delete" class="btn btn-danger btn-sm btn" (click)="deleteOrder(order)"><i class="bi bi-trash-fill"></i></a>
