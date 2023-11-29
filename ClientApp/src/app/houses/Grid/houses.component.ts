@@ -56,7 +56,19 @@ export class HousesComponent implements OnInit {
     } else if (type === -1) {
       console.log("Sort hilo", this.selectedSort);
       this.filteredHouses.sort((a, b) => b.Price - a.Price);
-    } else {
+    }
+
+    else if (type === 2) {
+      console.log("Sort A-Z", this.selectedSort);
+      this.filteredHouses.sort((a, b) => a.Address.localeCompare(b.Address, 'sv'));
+    } else if (type === -2) {
+      console.log("Sort Z-A", this.selectedSort);
+      this.filteredHouses.sort((a, b) => b.Address.localeCompare(a.Address, 'sv'));
+    }
+
+
+
+     else {
       console.log("Sort??", this.selectedSort);
       this.filteredHouses.sort((a, b) => a.HouseId - b.HouseId);
     }

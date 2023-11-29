@@ -7,11 +7,15 @@
         </div>
         <div id="filterText" class="col-md-1">Sort by: </div>
         <div id="sort" class="col-md-3">
-            <select name="sortby" id="sortInput" [(ngModel)]="selectedSort" (change)="sortHouses($event)">
-                <option value="0">None</option>
-                <option value="1">Price: Low-High</option>
-                <option value="-1">Price: High-Low</option>
-            </select>
+          <select name="sortby" id="sortInput" [(ngModel)]="selectedSort" (change)="sortHouses($event)">
+            <option value="0">None</option>
+            <option value="1">Price: Low-High</option>
+            <option value="-1">Price: High-Low</option>
+
+
+            <option value="2">Alphabetical: A-Z</option>
+            <option value="-2">Alphabetical: Z-A</option>
+          </select>
         </div>
     </div>
     <div class="row g-4">
