@@ -20,10 +20,9 @@ export class RegisterComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
-      number: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+      number: [null, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]], });
     }
 
   ngOnInit(): void {
