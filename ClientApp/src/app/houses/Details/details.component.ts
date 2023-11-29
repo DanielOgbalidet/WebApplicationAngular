@@ -47,7 +47,7 @@ export class DetailsComponent implements OnInit {
       this.getHouse(this.houseId);
       this.endDateMin.setDate(this.endDateMin.getDate() + 1); // Add one day
       this.endDateMinString = new Date(this.endDateMin).toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
-      this.startCarousel();
+      //this.startCarousel();
     });
 
     this._houseService.showId(sessionStorage.getItem("email")!).subscribe(
@@ -128,13 +128,15 @@ export class DetailsComponent implements OnInit {
   }
 
   currentSlideIndex: number = 0;
-  public intervalId: any;
+  //public intervalId: any;
 
+  /*
   startCarousel() {
     this.intervalId = setInterval(() => {
       this.nextSlide();
     }, 3000); // Set the interval (in milliseconds) according to your preference
   }
+  */
 
   prevSlide() {
     this.currentSlideIndex = (this.currentSlideIndex - 1 + this.images.length) % this.images.length;
