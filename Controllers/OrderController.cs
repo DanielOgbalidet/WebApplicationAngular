@@ -61,7 +61,7 @@ public class OrderController : Controller
         {
             _logger.LogError($"Order creation failed");
             var response = new { success = false, message = "Order creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -83,7 +83,7 @@ public class OrderController : Controller
         {
             _logger.LogError("[OrderController] Order update failed");
             var response = new { success = false, message = "Order creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -100,8 +100,8 @@ public class OrderController : Controller
             return Ok(response);
         } else
         {
-            var response = new { success = true, message = "Order " + id.ToString() + " deleted successfully" };
-            return Ok(response);
+            var response = new { success = false, message = "Order " + id.ToString() + " delete failed" };
+            return BadRequest(response);
         }
     }
 

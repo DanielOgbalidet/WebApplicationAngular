@@ -13,13 +13,20 @@ public class HouseController : Controller
 
     private readonly IHouseRepository _houseRepository;
     private readonly ILogger<HouseController> _logger;
-    private readonly HouseDbContext _db;
+    private readonly HouseDbContext? _db;
 
     public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db)
     {
         _houseRepository = houseRepository;
         _logger = logger;
         _db = db;
+    }
+
+    public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger)
+    {
+        _houseRepository = houseRepository;
+        _logger = logger;
+        _db = null;
     }
 
 
@@ -68,7 +75,7 @@ public class HouseController : Controller
         else
         {
             var response = new { success = false, message = "House creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -89,7 +96,7 @@ public class HouseController : Controller
         {
             _logger.LogError("[HouseController] House update failed for the House " + house.Address);
             var response = new { success = false, message = "House creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -109,16 +116,18 @@ public class HouseController : Controller
         if (!returnOk)
         {
             _logger.LogError("[HouseController] House deletion failed for the HouseId {HouseId:0000}", id);
-            return BadRequest("House deletion failed");
-        }
-
-        if (Directory.Exists(delPath))
+            var response = new { success = false, message = "House " + id.ToString() + " deleting falied" };
+            return BadRequest(response);
+        } else
         {
-            Directory.Delete(delPath, true);
-        }
+            if (Directory.Exists(delPath))
+            {
+                Directory.Delete(delPath, true);
+            }
 
-        var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
-        return Ok(response);
+            var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
+            return Ok(response);
+        }
     }
 
     //Find a user with the corresponding email
