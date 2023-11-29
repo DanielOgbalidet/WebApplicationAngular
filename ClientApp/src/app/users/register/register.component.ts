@@ -37,7 +37,9 @@ export class RegisterComponent {
       if (response.success) {
         console.log(response.message);
         sessionStorage.setItem("email", newUser.email);
-        this._router.navigate(['/home']);
+        this._router.navigate(['/home']).then(() => {
+          window.location.reload()
+        });
       } else {
         console.log('User creation failed');
       }
