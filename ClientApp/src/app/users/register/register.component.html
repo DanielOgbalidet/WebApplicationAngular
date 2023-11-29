@@ -3,17 +3,34 @@
         Register
     </h1>
     <form class="row" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    
+
         <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <label for="firstName"><b>First name</b><i class="bi bi-cash-coin"></i></label>
-                <input id="firstName" class="form-control" formControlName="firstName" />
+          <div class="form-group">
+
+
+            <label for="firstName"><b>First name</b><i class="bi bi-cash-coin"></i></label>
+            <input id="firstName" class="form-control" formControlName="firstName" />
+
+            <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="text-danger">
+             First name can't be empty
             </div>
+
+          </div>
         </div>
         <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <label for="lastName"><b>Last name</b><i class="bi bi-cash-coin"></i></label>
-                <input id="lastName" class="form-control" formControlName="lastName" />
+          <div class="form-group">
+            <label for="lastName"><b>Last name</b><i class="bi bi-cash-coin"></i></label>
+            <input id="lastName" class="form-control" formControlName="lastName" />
+
+            <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="text-danger">
+              Last name can't be empty
             </div>
+
+
+
+          </div>
         </div>
         <div class="col-md-12 col-sm-12">
             <div class="form-group">
@@ -32,7 +49,7 @@
             <input id="number" class="form-control" formControlName="number" />
 
             <div *ngIf="userForm.get('number')?.invalid && (userForm.get('number')?.touched && userForm.get('number')?.dirty)" class="text-danger">
-              Please enter a valid numeric value for number.
+              Please enter a valid numeric value for number
             </div>
 
           </div>
@@ -61,9 +78,15 @@
           </div>
 
 
+          <div *ngIf="userForm.invalid && submitButton" class="text-danger">
+            Please fill in your details for all of the fields
+          </div>
+
         </div>
         <div class="col-md-12 col-sm-12">
             <button id="register" type="submit">Register</button>
+
+
         </div>
     </form>
 </div>
