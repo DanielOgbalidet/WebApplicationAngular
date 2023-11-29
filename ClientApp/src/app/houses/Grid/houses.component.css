@@ -11,6 +11,17 @@
   pointer-events: none;
 }
 
+.container-fluid {
+  margin-left: 0vw;
+  padding-right: 2vw;
+  padding-top: 3vh;
+  padding-left: 2vw;
+  padding-bottom: 5vh;
+  margin-right: 2vw;
+  background-color: #FFFFF0;
+  font-family: 'Montserrat', sans-serif;
+}
+
 h1 {
   margin-bottom: 2.5vh;
 }
@@ -41,16 +52,6 @@ h1 {
   width: 50%;
   margin-left: 2.5vw;
   padding-left: 0.5vw;
-}
-
-.container-fluid {
-  margin-left: 0vw;
-  padding-right: 2vw;
-  padding-top: 3vh;
-  padding-left: 2vw;
-  padding-bottom: 5vh;
-  margin-right: 2vw;
-  background-color: #FFFFF0;
 }
 
 .card-img-top {
