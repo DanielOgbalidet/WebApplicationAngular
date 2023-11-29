@@ -1,10 +1,10 @@
 <div class="fullArea">
     <div class="container-fluid">
-        <h1>{{ isEditMode ? 'Update' : 'Create' }} house</h1>
+        <h1>{{ isEditMode ? 'Update' : 'Create' }} listing</h1>
 
         <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="address">Address <i class="bi bi-cash-coin"></i></label>
+            <label for="address">Address <i class="bi bi-house-fill"></i></label>
             <input id="address" class="form-control" formControlName="address" />
 
 
@@ -14,13 +14,18 @@
 
           </div>
             <div class="form-group" [class.has-error]="houseForm.get('price')?.invalid && houseForm.get('price')?.touched">
-                <label for="price">Price <i class="bi bi-cash-coin"></i></label>
+                <label for="price">Price <i class="bi bi-cash-stack"></i></label>
                 <input id="price" class="form-control" formControlName="price" />
 
 
                <div *ngIf="houseForm.get('price')?.invalid && (houseForm.get('price')?.touched && houseForm.get('price')?.dirty)" class="text-danger">
+<<<<<<< HEAD
   Please enter a valid numeric value for price
 </div>
+=======
+                    Please enter a valid numeric value for price.
+               </div>
+>>>>>>> 5c923c63174ce77c961e10e868dbca7c0c5e04a1
 
             </div>
             <div class="form-group" [class.has-error]="houseForm.get('bedrooms')?.invalid && houseForm.get('bedrooms')?.touched">
@@ -34,12 +39,12 @@
             </div>
 
             <div class="form-group">
-                <label for="gridImg">Grid image <i class="bi bi-door-open"></i></label>
+                <label for="gridImg">Grid image <i class="bi bi-card-image"></i></label>
                 <input type="file" id="gridImg" class="form-control" formControlName="gridImg" accept="image/*" (change)="onFileSelected($event)" />
             </div>
 
             <div class="form-group" *ngIf="isEditMode || houseForm.get('gridImg')?.value">
-                <label for="moreImg">More images? <i class="bi bi-door-open"></i></label>
+                <label for="moreImg">More images? <i class="bi bi-images"></i></label>
                 <input type="file" multiple id="moreImg" class="form-control" formControlName="moreImg" accept="image/*" (change)="onMoreImgSelected($event)" />
             </div>
 
@@ -59,7 +64,7 @@
                 <label for="userId">UserId <i class="bi bi-cash-coin"></i></label>
                 <input id="userId" class="form-control" formControlName="userId" />
             </div>
-            <button id="save" class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} house</button>
+            <button id="save" class="btn btn-primary" type="submit" [disabled]="houseForm.invalid">{{ isEditMode ? 'Update' : 'Create' }} listing</button>
             <button id="cancel" class="btn btn-secondary" [routerLinkActive]="['link-active']" [routerLink]="['/listings']">Cancel</button>
         </form>
     </div>

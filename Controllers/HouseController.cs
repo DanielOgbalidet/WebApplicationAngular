@@ -13,13 +13,19 @@ public class HouseController : Controller
 
     private readonly IHouseRepository _houseRepository;
     private readonly ILogger<HouseController> _logger;
-    private readonly HouseDbContext _db;
+    private readonly HouseDbContext? _db;
 
     public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db)
     {
         _houseRepository = houseRepository;
         _logger = logger;
         _db = db;
+    }
+
+    public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger)
+    {
+        _houseRepository = houseRepository;
+        _logger = logger;
     }
 
 
@@ -68,7 +74,7 @@ public class HouseController : Controller
         else
         {
             var response = new { success = false, message = "House creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -89,7 +95,7 @@ public class HouseController : Controller
         {
             _logger.LogError("[HouseController] House update failed for the House " + house.Address);
             var response = new { success = false, message = "House creation failed" };
-            return Ok(response);
+            return BadRequest(response);
         }
     }
 
@@ -126,8 +132,8 @@ public class HouseController : Controller
 
 
 
-        var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
-        return Ok(response);
+            var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
+            return Ok(response);
     }
 
     //Find a user with the corresponding email
