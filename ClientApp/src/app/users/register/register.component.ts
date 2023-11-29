@@ -11,6 +11,7 @@ import { UserService } from '../users.service';
 
 export class RegisterComponent {
   userForm: FormGroup;
+  submitButton: boolean = false;
 
   constructor(private _formbuilder: FormBuilder,
     private _router: Router,
@@ -32,6 +33,8 @@ export class RegisterComponent {
 
   onSubmit() {
     const newUser = this.userForm.value;
+
+    this.submitButton = true;
 
     this._userService.createUser(newUser).subscribe(response => {
       if (response.success) {
