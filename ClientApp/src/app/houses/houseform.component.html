@@ -3,10 +3,16 @@
         <h1>{{ isEditMode ? 'Update' : 'Create' }} house</h1>
 
         <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="address">Address <i class="bi bi-cash-coin"></i></label>
-                <input id="address" class="form-control" formControlName="address" />
+          <div class="form-group">
+            <label for="address">Address <i class="bi bi-cash-coin"></i></label>
+            <input id="address" class="form-control" formControlName="address" />
+
+
+            <div *ngIf="houseForm.get('address')?.invalid && houseForm.get('address')?.touched" class="text-danger">
+              Address cannot be empty
             </div>
+
+          </div>
             <div class="form-group" [class.has-error]="houseForm.get('price')?.invalid && houseForm.get('price')?.touched">
                 <label for="price">Price <i class="bi bi-cash-coin"></i></label>
                 <input id="price" class="form-control" formControlName="price" />
