@@ -29,6 +29,7 @@ export class DetailsComponent implements OnInit {
   images: string[] = [];
   totalPrice = 0;
   invalidDates: boolean = false;
+  currentSlideIndex: number = 0;
 
   // Variable to create order
   newOrder: IOrder = {} as IOrder;
@@ -47,7 +48,6 @@ export class DetailsComponent implements OnInit {
       this.getHouse(this.houseId);
       this.endDateMin.setDate(this.endDateMin.getDate() + 1); // Add one day
       this.endDateMinString = new Date(this.endDateMin).toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
-      this.startCarousel();
     });
 
     this._houseService.showId(sessionStorage.getItem("email")!).subscribe(
@@ -125,15 +125,6 @@ export class DetailsComponent implements OnInit {
       error => {
         console.error("Error fetching number of files:", error);
       });
-  }
-
-  currentSlideIndex: number = 0;
-  public intervalId: any;
-
-  startCarousel() {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 3000); // Set the interval (in milliseconds) according to your preference
   }
 
   prevSlide() {

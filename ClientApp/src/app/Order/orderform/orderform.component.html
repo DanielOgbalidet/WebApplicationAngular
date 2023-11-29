@@ -1,21 +1,28 @@
-<div class="container">
-    <h1>Update order</h1>
-    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="start"><b>Start date</b><i class="bi bi-cash-coin"></i></label>
-                <input type="date" id="startDate" class="form-control" formControlName="startDate" (change)="checkDates()" />
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Update order</h1>
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="start"><b>Start date</b><i class="bi bi-cash-coin"></i></label>
+                        <input type="date" id="startDate" class="form-control" formControlName="startDate" (change)="checkDates()" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="end"><b>End date</b><i class="bi bi-cash-coin"></i></label>
+                    <input type="date" id="endDate" class="form-control" formControlName="endDate" (change)="checkDates()" />
+
+                    <div *ngIf="dateInvalid" class="text-danger"> The end date can't be before start date </div>
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                    <button id="save" class="btn btn-primary" type="submit" [disabled]="dateInvalid">Update order</button>
+                    <button id="cancel" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
         </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="end"><b>End date</b><i class="bi bi-cash-coin"></i></label>
-                <input type="date" id="endDate" class="form-control" formControlName="endDate" (change)="checkDates()" />
-            </div>
-        </div>
-        <div class="col-md-12">
-            <button id="save" class="btn btn-primary" type="submit" [disabled]="dateInvalid">Update order</button>
-            <button id="cancel" class="btn btn-secondary">Cancel</button>
-        </div>
-    </form>
+    </div>
 </div>

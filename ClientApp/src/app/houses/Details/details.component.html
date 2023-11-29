@@ -10,10 +10,10 @@
     </ng-container>
     <ng-container *ngIf="numberOfFiles > 1">
         <div class="modal-content">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselModal" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === currentSlideIndex">
-                        <img [src]="image" class="d-block img-fluid" alt="Slide">
+                        <img id="carimg" [src]="image" class="d-block img-fluid" alt="Slide">
                     </div>
                 </div>
                 <a id="indicator" class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
@@ -30,30 +30,27 @@
 <div class="container-fluid" id="details_container" *ngIf="!isObjectEmpty(newHouse)">
     <div class="row">
         <div id="image-part" class="col-11 col-lg-6 col-md-11">
+            <!-- If no images of house: display noimg.jpg -->
             <ng-container *ngIf="numberOfFiles === 0">
                 <img [src]="(baseImgUrl + 'noimg.jpg')" alt="{{ newHouse.ImageUrl }}">
             </ng-container>
+            <!-- If ony one image of house: display that image -->
             <ng-container *ngIf="numberOfFiles === 1">
-                <!-- Muligens sette inn bilde nr[0] i stedenfor ImageUrl -->
                 <img id="modalSrc" [src]="(images[0])" alt="{{ newHouse.ImageUrl }}" (click)="openModal()">
             </ng-container>
+            <!-- If more than one image of house: carousel of images -->
             <ng-container *ngIf="numberOfFiles > 1">
                 <div class="row">
-                    <div id="carouselDetails" class="carousel carousel-dark slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li *ngFor="let image of images; let i = index" [attr.data-target]="'#carouselDetails'" [attr.data-slide-to]="i" [class.active]="i === currentSlideIndex"></li>
-                        </ol>
-                        <div class="carousel-outer">
-                            <div class="carousel-inner">
-                                <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === currentSlideIndex">
-                                    <img id="modalSrc" [src]="image" class="d-block w-100" alt="Slide" (click)="openModal()">
-                                </div>
+                    <div id="carouselDetails" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === currentSlideIndex">
+                                <img id="modalSrc" [src]="image" class="d-block w-100" alt="Slide" (click)="openModal()">
                             </div>
                         </div>
-                        <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
+                        <a id="carindicator" class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </a>
-                        <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
+                        <a id="carindicator" class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -118,7 +115,7 @@
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <th><p><i class="bi bi-cash-coin"></i>   TOTAL PRICE: </p></th>
-                                <td><p id="totalPrice">{{ totalPrice }}</p></td>
+                                <td><p id="totalPrice">{{ totalPrice | convertCurrency : 'kr.'}}</p></td>
                             </tr>
                             <tr class="info" *ngIf="!invalidDates">
                                 <td><button id="makeOrder" class="btn btn-primary" (click)="createOrder()">Order</button></td>

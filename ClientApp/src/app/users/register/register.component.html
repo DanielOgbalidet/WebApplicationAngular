@@ -19,25 +19,48 @@
             <div class="form-group">
                 <label for="address"><b>Address</b><i class="bi bi-cash-coin"></i></label>
                 <input id="address" class="form-control" formControlName="address" />
+
+              <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="text-danger">
+                Address cannot be empty
+              </div>
+
             </div>
         </div>
         <div class="col-md-12 col-sm-12">
-            <div class="form-group">
-                <label for="number"><b>Number</b><i class="bi bi-cash-coin"></i></label>
-                <input id="number" class="form-control" formControlName="number" />
+          <div class="form-group">
+            <label for="number"><b>Number</b><i class="bi bi-cash-coin"></i></label>
+            <input id="number" class="form-control" formControlName="number" />
+
+            <div *ngIf="userForm.get('number')?.invalid && (userForm.get('number')?.touched && userForm.get('number')?.dirty)" class="text-danger">
+              Please enter a valid numeric value for number.
             </div>
+
+          </div>
+
+
         </div>
         <div class="col-md-12 col-sm-12">
-            <div class="form-group">
-                <label for="email"><b>Email</b><i class="bi bi-cash-coin"></i></label>
-                <input id="email" class="form-control" formControlName="email" />
+          <div class="form-group">
+            <label for="email"><b>Email</b><i class="bi bi-cash-coin"></i></label>
+            <input id="email" class="form-control" formControlName="email" />
+
+            <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.touched && userForm.get('email')?.dirty)" class="text-danger">
+              Please enter a valid email
             </div>
+
+          </div>
         </div>
         <div class="col-md-12 col-sm-12">
-            <div class="form-group">
-                <label for="password"><b>Password</b><i class="bi bi-cash-coin"></i></label>
-                <input type="password" id="password" class="form-control" formControlName="password" />
-            </div>
+          <div class="form-group">
+            <label for="password"><b>Password</b><i class="bi bi-cash-coin"></i></label>
+            <input type="password" id="password" class="form-control" formControlName="password" />
+          </div>
+
+          <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.touched && userForm.get('password')?.dirty)" class="text-danger">
+            Choose a password with atleast 8 characters, atleast one uppercase and lowercase letter, one number and one special character
+          </div>
+
+
         </div>
         <div class="col-md-12 col-sm-12">
             <button id="register" type="submit">Register</button>
