@@ -28,13 +28,11 @@ export class HousesComponent implements OnInit {
 
   set listFilter(value: string) {
     this._listFilter = value;
-    console.log('In setter:', value);
     this.filteredHouses = this.performFilter(value);
   }
 
   getHouses(): void {
     this._houseService.getHouses().subscribe(data => {
-      console.log("All", JSON.stringify(data));
       this.houses = data;
       this.filteredHouses = this.houses;
     });
@@ -51,38 +49,16 @@ export class HousesComponent implements OnInit {
   sortHouses(event: any) {
     const type = Number(this.selectedSort);
     if (type === 1) {
-      console.log("Sort lohi", this.selectedSort);
       this.filteredHouses.sort((a, b) => a.Price - b.Price);
     } else if (type === -1) {
-      console.log("Sort hilo", this.selectedSort);
       this.filteredHouses.sort((a, b) => b.Price - a.Price);
-    }
-
-    else if (type === 2) {
-      console.log("Sort A-Z", this.selectedSort);
+    } else if (type === 2) {
       this.filteredHouses.sort((a, b) => a.Address.localeCompare(b.Address, 'sv'));
     } else if (type === -2) {
-      console.log("Sort Z-A", this.selectedSort);
       this.filteredHouses.sort((a, b) => b.Address.localeCompare(a.Address, 'sv'));
-    }
-
-
-
-
-
-
-     else {
-      console.log("Sort??", this.selectedSort);
+    } else {
       this.filteredHouses.sort((a, b) => a.HouseId - b.HouseId);
     }
-  }
-
-  toggleImage(): void {
-    this.displayImage = !this.displayImage;
-  }
-
-  navigateToHouseform() {
-    this._router.navigate(['/houseform']);
   }
 
   ngOnInit(): void {

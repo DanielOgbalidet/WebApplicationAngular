@@ -10,7 +10,7 @@
     </ng-container>
     <ng-container *ngIf="numberOfFiles > 1">
         <div class="modal-content">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselModal" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div *ngFor="let image of images; let i = index" class="carousel-item" [class.active]="i === currentSlideIndex">
                         <img id="carimg" [src]="image" class="d-block img-fluid" alt="Slide">

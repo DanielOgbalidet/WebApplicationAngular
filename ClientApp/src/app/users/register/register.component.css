@@ -11,6 +11,7 @@
   width: 100%;
   height: 100%;
   background-color: #FFFFF0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .row {
@@ -30,7 +31,7 @@ input {
   box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
+/* Style for all buttons */
 button {
   background-color: #A9B388;
   color: white;
@@ -42,7 +43,7 @@ button {
   border-radius: 5px;
 }
 
-  /* Add a hover effect for buttons */
+  /* Hover effect for buttons */
   button:hover {
     opacity: 0.8;
   }

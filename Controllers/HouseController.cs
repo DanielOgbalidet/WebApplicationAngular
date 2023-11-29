@@ -112,10 +112,19 @@ public class HouseController : Controller
             return BadRequest("House deletion failed");
         }
 
-        if (Directory.Exists(delPath))
+        try
         {
-            Directory.Delete(delPath, true);
+            if (Directory.Exists(delPath))
+            {
+                Directory.Delete(delPath, true);
+            }
         }
+        catch (Exception e)
+        {
+            _logger.LogError("Failed to remove folder: ", e);
+        }
+
+
 
         var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
         return Ok(response);
@@ -171,30 +180,6 @@ public class HouseController : Controller
 
         return houses;
     }
-
-    /*
-           [HttpPost("createDir")]
-           public Task<IActionResult> CreateDir([FromForm] IFormFile gridImg, [FromForm] string address)
-           {
-               string curdir = System.IO.Directory.GetCurrentDirectory();
-               string subpath = curdir + "/ClientApp/src/assets/images/";
-               string path = System.IO.Path.Combine(subpath, address);
-
-               Directory.CreateDirectory(path);
-               _logger.LogInformation($"YOUR NEWLY CREATED FOLDER: {path}");
-
-               string filePath = Path.Combine(path, gridImg.FileName);
-
-               using (var stream = new FileStream(filePath, FileMode.Create))
-               {
-                   gridImg.CopyTo(stream);
-                   _logger.LogInformation($"Image {filePath} copied to stream");
-               }
-
-               var response = new { success = true, message = "Directory created successfully" };
-               return Task.FromResult<IActionResult>(Ok(response));
-           }
-       */
 
     //function for creating imagefolder for each house and adds gridImage to the folder.
     //Takes the houses´ address and gridImage as arguments
@@ -328,7 +313,7 @@ public class HouseController : Controller
 
             for (int i = 0; i < images.Length; i++)
             {
-                // Split stien ved directory-separatoren ("/" eller "\") og behold de tre siste delene
+                // Removes first part of path to make path valid for html-img-src
                 string[] pathParts = images[i].Split(Path.DirectorySeparatorChar);
                 if (pathParts.Length >= 4)
                 {

@@ -11,5 +11,4 @@ export interface IUser {
   Houses: IHouse[];
   Order: IOrder[];
   Password: string;
-  // Other user properties...
 }
