@@ -68,6 +68,9 @@ export class HousesComponent implements OnInit {
 
 
 
+
+
+
      else {
       console.log("Sort??", this.selectedSort);
       this.filteredHouses.sort((a, b) => a.HouseId - b.HouseId);
