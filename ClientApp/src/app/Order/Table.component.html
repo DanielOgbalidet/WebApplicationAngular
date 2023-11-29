@@ -23,9 +23,10 @@
           <td>{{ order.StartDate }}</td>
           <td>{{ order.EndDate }}</td>
           <td>
-            <a id="house-link" [routerLink]="['/details', order.House.HouseId]">
+            <a *ngIf="order.House" id="house-link" [routerLink]="['/details', order.House.HouseId]">
               {{ order.House.Address }}
             </a>
+            <span *ngIf="!order.House">N/A</span>
           </td>
           <td>{{ order.TotalPrice | convertCurrency : 'kr.'}}</td>
           <td>

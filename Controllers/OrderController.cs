@@ -45,6 +45,7 @@ public class OrderController : Controller
                 OrderDate = inOrder.OrderDate,
                 UserId = inOrder.UserId,
                 HouseId = inOrder.HouseId,
+                House = inOrder.House,
                 StartDate = inOrder.StartDate,
                 EndDate = inOrder.EndDate,
                 TotalPrice = inOrder.TotalPrice

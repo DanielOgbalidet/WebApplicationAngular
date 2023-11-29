@@ -13,14 +13,6 @@ public class HouseController : Controller
 
     private readonly IHouseRepository _houseRepository;
     private readonly ILogger<HouseController> _logger;
-    private readonly HouseDbContext? _db;
-
-    public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger, HouseDbContext db)
-    {
-        _houseRepository = houseRepository;
-        _logger = logger;
-        _db = db;
-    }
 
     public HouseController(IHouseRepository houseRepository, ILogger<HouseController> logger)
     {
@@ -138,53 +130,26 @@ public class HouseController : Controller
 
     //Find a user with the corresponding email
     [HttpGet("showId/{email}")]
-    public int ShowUserId(string email)
+    public Task<int> ShowUserId(string email)
     {
-        //Retreive user from database
-        var user = _db.User.FirstOrDefault(u => u.Email == email);
-
-        //Check if user exists
-        if (user != null)
-        {
-
-            string userIdString = user.UserId.ToString();
-
-            if (int.TryParse(userIdString, out int userId))
-            {
-                _logger.LogInformation($"User ID: {userId}");
-                return userId;
-            }
-            else
-            {
-                _logger.LogError($"Unable to convert user.Id to int for email: {email}");
-                return -1;
-            }
-        }
-        else
-        {
-            _logger.LogWarning($"User not found for email: {email}");
-            return -2;
-        }
+        return _houseRepository.ShowUserId(email);
     }
 
     //Find all houses that was created by a specific user
     [HttpGet("listings/{email}")]
-    public List<House> GetHousesByUserId(string email)
+    public async Task<IActionResult> GetHousesByUserId(string email)
     {
-        int id = ShowUserId(email);
+        int id = await ShowUserId(email);
 
-        var houses = _db.Houses.Where(h => h.UserId == id).ToList();
+        var houses = await _houseRepository.GetHousesByUserId(id);
 
-        if (houses.Count > 0)
+        if (houses == null)
         {
-            _logger.LogInformation($"Found {houses.Count} houses with UserId: {id}");
-        }
-        else
-        {
-            _logger.LogWarning($"No houses found with UserId: {id}");
+            _logger.LogError("[HouseController] House list not found while executing _houseRepository.GetHousesByUserId()");
+            return NotFound("House list not found");
         }
 
-        return houses;
+        return Ok(houses);
     }
 
     //function for creating imagefolder for each house and adds gridImage to the folder.

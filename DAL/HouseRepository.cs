@@ -32,6 +32,11 @@ public class HouseRepository : IHouseRepository
         return await _db.Houses.FindAsync(id);
     }
 
+    public async Task<IEnumerable<House>> GetHousesByUserId(int id)
+    {
+        return await _db.Houses.Where(h => h.UserId == id).ToListAsync();
+    }
+
 
     //A new house is created and then added and saved to the database
     public async Task<bool> Create(House house)
@@ -95,5 +100,18 @@ public class HouseRepository : IHouseRepository
             return false;
         }
     }
-}
 
+    public async Task<int> ShowUserId(string email)
+    {
+        var user = await _db.User.FirstOrDefaultAsync(u => u.Email == email);
+
+        if (user != null)
+        {
+            return user.UserId;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+}

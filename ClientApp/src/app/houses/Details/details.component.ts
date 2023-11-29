@@ -70,6 +70,7 @@ export class DetailsComponent implements OnInit {
     // Temp userId
     this.newOrder.UserId = 1;
     this.newOrder.HouseId = this.houseId;
+    this.newOrder.House = this.newHouse;
     this.newOrder.UserId = this.userId;
 
     // Get values from input fields (startDate and endDate)
