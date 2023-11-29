@@ -50,9 +50,6 @@ export class HouseformComponent {
   }
 
   onSubmit() {
-    console.log("HouseCreate form submitted");
-    console.log(this.houseForm);
-
     const newHouse = this.houseForm.value;
 
     const gridImgControl = this.houseForm.get('gridImg');
@@ -69,19 +66,18 @@ export class HouseformComponent {
           if (dirResponse.success) {
             console.log(dirResponse.message);
           } else {
-            console.log('Could not create directory');
+            console.error('Could not create directory');
           }
         });
       }
 
       if (moreImgControl && moreImgControl.value) {
         const images = moreImgControl.value;
-        console.log("MORE_IMG_VALS: ", moreImgControl?.value);
         this._houseService.uploadImages(images, address).subscribe(imgResponse => {
           if (imgResponse.success) {
             console.log(imgResponse.message);
           } else {
-            console.log("Wrong");
+            console.error("Images failed to upload");
           }
         });
       }
@@ -141,7 +137,6 @@ export class HouseformComponent {
     this._houseService.getHouseById(houseId)
       .subscribe(
         (house: any) => {
-          console.log('retreived house: ', house);
           this.houseForm.patchValue({
             price: house.Price,
             address: house.Address,

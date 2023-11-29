@@ -26,14 +26,14 @@ h1 {
   position: absolute;
   left: 0;
   bottom: 0;
-  opacity: 1; /* Set opacity to 1 to make it visible by default */
+  opacity: 1;
   transition: all 0.2s;
   pointer-events: none;
 }
 
 .table-container {
   width: 100%;
-  overflow: auto; /* Important to make the table scrollable in smaller devices */
+  overflow: auto;
   max-height: 75vh;
 }
 

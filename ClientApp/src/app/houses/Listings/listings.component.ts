@@ -30,7 +30,6 @@ export class ListingsComponent implements OnInit {
       this._houseService.deleteHouse(house.HouseId).subscribe(
         (response) => {
           if (response.success) {
-            console.log("House deleted", response.message);
             window.location.reload();
           }
         },
@@ -41,12 +40,10 @@ export class ListingsComponent implements OnInit {
   }
 
   getMyListings() {
-    console.log("Get listings started");
     const email = sessionStorage.getItem("email")!;
     this._houseService.getListings(email)
       .subscribe(
         (listings: IHouse[]) => {
-          console.log('retreived listings: ', JSON.stringify(listings));
           this.myListings = listings;
         },
         (error: any) => {

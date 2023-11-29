@@ -41,13 +41,12 @@ input {
   width: 100%;
 }
 
-  /* Add a hover effect for buttons */
+  /* Hover effect for buttons */
   #save:hover {
     opacity: 0.8;
   }
 
 #cancel {
-  /* #d12e35*/
   background-color: grey;
   color: white;
   margin-top: 2vh;

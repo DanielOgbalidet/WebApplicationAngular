@@ -3,16 +3,16 @@
         <h1>{{ isEditMode ? 'Update' : 'Create' }} house</h1>
 
         <form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="address">Address <i class="bi bi-cash-coin"></i></label>
+                <input id="address" class="form-control" formControlName="address" />
+            </div>
             <div class="form-group" [class.has-error]="houseForm.get('price')?.invalid && houseForm.get('price')?.touched">
                 <label for="price">Price <i class="bi bi-cash-coin"></i></label>
                 <input id="price" class="form-control" formControlName="price" />
                 <div *ngIf="houseForm.get('price')?.invalid && houseForm.get('price')?.touched" class="text-danger">
                     Please enter a valid numeric value for price.
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="address">Address <i class="bi bi-cash-coin"></i></label>
-                <input id="address" class="form-control" formControlName="address" />
             </div>
             <div class="form-group" [class.has-error]="houseForm.get('bedrooms')?.invalid && houseForm.get('bedrooms')?.touched">
                 <label for="bedrooms">Bedrooms <i class="bi bi-door-open"></i></label>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-                <label for="gridImg">ImageUrl <i class="bi bi-door-open"></i></label>
+                <label for="gridImg">Grid image <i class="bi bi-door-open"></i></label>
                 <input type="file" id="gridImg" class="form-control" formControlName="gridImg" accept="image/*" (change)="onFileSelected($event)" />
             </div>
 

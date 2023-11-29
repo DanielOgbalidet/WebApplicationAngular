@@ -14,19 +14,19 @@ a.navbar-brand {
   white-space: normal;
   word-break: break-all;
   font-weight: bolder;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .navbar-brand:hover {
-  color: #FFFFFF; /* Replace with your desired color */
+  color: #FFFFFF;
 }
 
 a.nav-link {
-    color: white; 
+  color: white;
 }
 
 .container {
-  width: 100vw; 
+  width: 100vw;
   margin: 0px;
   padding: 0px;
 }
@@ -54,7 +54,7 @@ header {
   margin-left: 2vw;
   position: relative;
   padding-bottom: 8px;
-  color: white; 
+  color: white;
 }
 
   .nav-link::after {

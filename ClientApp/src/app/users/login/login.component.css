@@ -36,7 +36,7 @@ input[type=text], input[type=password] {
   border-radius: 5px;
 }
 
-/* Set a style for all buttons */
+/* Style for all buttons */
 button {
   background-color: #A9B388;
   color: white;
@@ -48,7 +48,7 @@ button {
   border-radius: 5px;
 }
 
-  /* Add a hover effect for buttons */
+  /* Hover effect for buttons */
   button:hover {
     opacity: 0.8;
   }
@@ -62,7 +62,7 @@ button {
 /* Styles for the loading spinner */
 .loader {
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #5F6F52; /* Change color if needed */
+  border-top: 4px solid #5F6F52;
   border-radius: 50%;
   width: 20px;
   height: 20px;
