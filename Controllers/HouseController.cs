@@ -26,7 +26,6 @@ public class HouseController : Controller
     {
         _houseRepository = houseRepository;
         _logger = logger;
-        _db = null;
     }
 
 
@@ -135,7 +134,6 @@ public class HouseController : Controller
 
             var response = new { success = true, message = "House " + id.ToString() + " deleted successfully" };
             return Ok(response);
-        }
     }
 
     //Find a user with the corresponding email
